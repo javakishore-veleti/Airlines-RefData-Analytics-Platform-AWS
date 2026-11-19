@@ -41,11 +41,31 @@ Decisions are numbered `D##`. Record new ones here when brainstorming closes the
 
 **Out of scope for D2:** Debezium connector registration and Iceberg apply (Milestone M03).
 
-## D3 — MasterData-API modular monolith and layering (boarded)
+## D3 — MasterData-API modular monolith and layering
 
-**Status:** Boarded (2026-11-19) — implement under M04 stories #56 / #31 / #55 / #32. Full write-up lands with story #56.
+**Status:** Decided (2026-11-19) — story #56  
+**Spec:** `docs/Superpowers/specs/2026-11-19-m04-0011-d3-masterdata-api-architecture.md`
 
-**Summary (locked):** `Middleware/MasterData-API/` is the FastAPI project root (modular monolith). Layers `api → facade → WF → tasks → dao`; facades use `interface.py`/`impl.py`; each WF folder uses **WF** naming with `interface.py` + `tasks/`; Ctx/Req/Resp DTOs in `common/dtos/usecase.py`; per-layer `object_factory.py` bean lookup; `app-startup.sh` / `app-status.sh` / `app-shutdown.sh` per microservice; root npm `local:containers:*` / `local:middleware:*` scans `Middleware/*/app-*.sh`.
+**Summary:** `Middleware/MasterData-API/` is the FastAPI modular-monolith project root. The same layering applies later to `Middleware/AccountService-API/` (#58+).
+
+**Call chain (mandatory):** `api → facade → WF → tasks → dao`. Business work does not skip layers.
+
+| Concern | Rule |
+|---|---|
+| Project root | `Middleware/MasterData-API/` (FastAPI + OpenAPI) |
+| Facades | `interface.py` + `impl.py`; callers use the interface |
+| WF | Folder name starts with **`WF`** (e.g. `WFHealth`, `WFGenerateCdcEvents`); owns orchestration + `tasks/` |
+| Tasks | Single-purpose units invoked by the WF |
+| DAO | Persistence only (MySQL OLTP; lake readers when needed) |
+| DTOs | `Ctx` / `Req` / `Resp` under `common/dtos/` — no raw ORM across facade/WF |
+| object_factory | Per-layer bean lookup so tests can swap implementations |
+| Packages | Domain-first under each layer (health, market_rule, cdc, lake_query, messaging) |
+| Lifecycle | `app-startup.sh` / `app-status.sh` / `app-shutdown.sh` at the service root |
+| Operator npm | Root `package.json` `local:containers:*` / `local:middleware:*` discover `Middleware/*/app-*.sh` (#55) |
+
+**Reference use cases:** **Health** (#31 skeleton) and **GenerateCdcEvents** (#32 Admin write path).
+
+**Implementing stories:** #31 skeleton, #55 npm scripts, #32 write APIs, #33 lake read façade, #34 async messaging.
 
 ## D4 — Debezium CDC for `market_db.market_rule`
 

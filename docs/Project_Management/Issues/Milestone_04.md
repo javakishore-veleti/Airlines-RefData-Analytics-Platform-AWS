@@ -66,10 +66,10 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 
 | Issue | Step | Command | Status | Started | Completed |
 |---|---|---|---|---|---|
-| #56 | 1 | `/arfd-story-start 56` | Planned | - | - |
-| #56 | 2 | `/brainstorming Story #56: finalize D3 MasterData-API architecture` | Planned | - | - |
-| #56 | 3 | `/writing-plans Story #56` | Planned | - | - |
-| #56 | 4 | `/verification-before-completion Story #56` | Planned | - | - |
+| #56 | 1 | `/arfd-story-start 56` | Done | 2026-11-19 18:05 | 2026-11-19 18:05 |
+| #56 | 2 | `/brainstorming Story #56: finalize D3 MasterData-API architecture` | Done | 2026-11-19 18:05 | 2026-11-19 18:06 |
+| #56 | 3 | `/writing-plans Story #56` | Done | 2026-11-19 18:06 | 2026-11-19 18:06 |
+| #56 | 4 | `/verification-before-completion Story #56` | In progress | 2026-11-19 18:06 | - |
 | #56 | 5 | `/arfd-commit-push 56` | Planned | - | - |
 | #56 | 6 | `/arfd-story-complete 56` | Planned | - | - |
 | #31 | 1 | `/arfd-story-start 31` | Planned | - | - |
