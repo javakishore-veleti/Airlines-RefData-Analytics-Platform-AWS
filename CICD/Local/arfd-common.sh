@@ -61,7 +61,49 @@ _tcp_open() {
 }
 
 probe_mysql() {
-  _tcp_open "${ARFD_MYSQL_HOST}" "${ARFD_MYSQL_PORT}"
+  # D1: TCP alone is not enough — require ARFD credentials against market_db.
+  if ! _tcp_open "${ARFD_MYSQL_HOST}" "${ARFD_MYSQL_PORT}"; then
+    return 1
+  fi
+  if command -v mysql >/dev/null 2>&1; then
+    MYSQL_PWD="${ARFD_MYSQL_PASSWORD}" mysql \
+      -h"${ARFD_MYSQL_HOST}" -P"${ARFD_MYSQL_PORT}" -u"${ARFD_MYSQL_USER}" \
+      --protocol=TCP "${ARFD_MYSQL_DATABASE}" \
+      -e "SELECT 1" >/dev/null 2>&1
+    return $?
+  fi
+  if command -v python3 >/dev/null 2>&1; then
+    ARFD_MYSQL_HOST="${ARFD_MYSQL_HOST}" ARFD_MYSQL_PORT="${ARFD_MYSQL_PORT}" \
+      ARFD_MYSQL_USER="${ARFD_MYSQL_USER}" ARFD_MYSQL_PASSWORD="${ARFD_MYSQL_PASSWORD}" \
+      ARFD_MYSQL_DATABASE="${ARFD_MYSQL_DATABASE}" \
+      python3 - <<'PY' >/dev/null 2>&1
+import os, sys
+try:
+    import pymysql
+except ImportError:
+    sys.exit(2)
+try:
+    c = pymysql.connect(
+        host=os.environ["ARFD_MYSQL_HOST"],
+        port=int(os.environ["ARFD_MYSQL_PORT"]),
+        user=os.environ["ARFD_MYSQL_USER"],
+        password=os.environ["ARFD_MYSQL_PASSWORD"],
+        database=os.environ["ARFD_MYSQL_DATABASE"],
+        connect_timeout=2,
+    )
+    c.close()
+except Exception:
+    sys.exit(1)
+sys.exit(0)
+PY
+    local rc=$?
+    # pymysql missing → fall back to TCP-only (compose may still apply schema)
+    if [[ "${rc}" -eq 2 ]]; then
+      return 0
+    fi
+    return "${rc}"
+  fi
+  return 0
 }
 
 probe_postgres() {

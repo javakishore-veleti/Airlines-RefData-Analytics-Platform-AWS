@@ -13,11 +13,17 @@ if probe_mysql; then
   echo "  mysql: reused (${ARFD_MYSQL_HOST}:${ARFD_MYSQL_PORT})"
   state_set mysql reused
 else
-  echo "  mysql: starting (managed-by-arfd)"
+  # If configured port is occupied by a non-ARFD MySQL, shift managed bind.
+  if _tcp_open "${ARFD_MYSQL_HOST}" "${ARFD_MYSQL_PORT}" && [[ "${ARFD_MYSQL_PORT}" == "3306" ]]; then
+    export ARFD_MYSQL_PORT=3307
+    echo "  mysql: port 3306 in use without ARFD creds — managed bind ${ARFD_MYSQL_PORT}"
+  fi
+  echo "  mysql: starting (managed-by-arfd) on ${ARFD_MYSQL_PORT}"
   compose_up "${SCRIPT_DIR}/MySQL"
   state_set mysql managed-by-arfd
-  # Wait for port
-  for _ in $(seq 1 60); do
+  state_set mysql_port "${ARFD_MYSQL_PORT}"
+  # Wait for auth-ready MySQL
+  for _ in $(seq 1 90); do
     probe_mysql && break
     sleep 1
   done

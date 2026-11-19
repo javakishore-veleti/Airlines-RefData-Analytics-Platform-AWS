@@ -116,10 +116,17 @@
   </header>
   <main>
     <label for="apiBase">API base URL</label>
-    <input id="apiBase" type="text" value="http://127.0.0.1:8100" />
+    <input id="apiBase" type="text" value="http://127.0.0.1:8110" />
 
     <label for="count">Event count</label>
     <input id="count" type="number" min="1" max="100000" value="10" />
+
+    <p class="lede" style="margin:0 0 1rem;font-size:0.9rem">
+      Quick links:
+      <a id="link10" href="#">generate 10</a> ·
+      <a id="link100" href="#">generate 100</a> ·
+      <a id="link1000" href="#">generate 1000</a>
+    </p>
 
     <div class="actions">
       <button type="button" id="generateBtn">Generate CDC events</button>
@@ -169,6 +176,17 @@
 
     document.getElementById("generateBtn").addEventListener("click", generate);
     document.getElementById("healthBtn").addEventListener("click", checkHealth);
+
+    function wireQuick(id, n) {
+      document.getElementById(id).addEventListener("click", (e) => {
+        e.preventDefault();
+        document.getElementById("count").value = String(n);
+        generate();
+      });
+    }
+    wireQuick("link10", 10);
+    wireQuick("link100", 100);
+    wireQuick("link1000", 1000);
   </script>
 </body>
 </html>
