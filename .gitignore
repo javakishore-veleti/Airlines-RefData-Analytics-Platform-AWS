@@ -142,6 +142,13 @@ celerybeat.pid
 mnesia/
 rabbitmq/
 rabbitmq-data/
+# Keep ARFD compose path (folder name matches product service)
+!CICD/Local/RabbitMQ/
+!CICD/Local/RabbitMQ/**
+
+# Python packaging lib/ should not ignore CICD helpers
+!CICD/Local/lib/
+!CICD/Local/lib/**
 
 # ActiveMQ
 activemq-data/

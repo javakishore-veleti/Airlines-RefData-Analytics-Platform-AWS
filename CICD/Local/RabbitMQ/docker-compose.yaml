@@ -1,0 +1,23 @@
+# RabbitMQ for Middleware / portal async messaging (story #18).
+# Credentials (local only): user=arfd password=arfd — override via .env.
+services:
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: arfd-rabbitmq
+    ports:
+      - "${ARFD_RABBITMQ_PORT:-5672}:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${ARFD_RABBITMQ_USER:-arfd}
+      RABBITMQ_DEFAULT_PASS: ${ARFD_RABBITMQ_PASSWORD:-arfd}
+      RABBITMQ_DEFAULT_VHOST: arfd
+    volumes:
+      - arfd_rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  arfd_rabbitmq_data:
