@@ -82,7 +82,7 @@ pip install pymysql
 python scripts/seed_market_rules.py --count 1000000
 
 # Middleware API (health + CDC generate) — default port 8110
-cd Middleware/API-Services
+cd Middleware/MasterData-API
 pip install -r requirements.txt
 ./run.sh
 # or: uvicorn app.main:app --host 127.0.0.1 --port 8110

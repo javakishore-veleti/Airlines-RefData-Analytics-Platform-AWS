@@ -22,7 +22,7 @@ Labels (GitHub): `type:epic` · `type:feature` · `type:story` · `area:*`
 ### Epic E0.2 — Repository skeleton
 - **Feature F0.2.1 — Directory placeholders**
   - S0.2.1.1 `CICD/Local/` scripts + Kafka compose path stubs
-  - S0.2.1.2 `Middleware/API-Services`, `Middleware/DAGs`
+  - S0.2.1.2 `Middleware/MasterData-API`, `Middleware/DAGs`
   - S0.2.1.3 `Portals/Airlines-RD-Admin`, `Portals/Airlines-RD-Intelligence`
 
 ---
@@ -94,7 +94,7 @@ Labels (GitHub): `type:epic` · `type:feature` · `type:story` · `area:*`
   - S4.1.1.1 App shell + auth stub (local)
   - S4.1.1.2 Market rules list / create / update / deactivate
   - S4.1.1.3 CDC status view (pipeline health summary)
-  - S4.1.1.4 Wire to `Middleware/API-Services`
+  - S4.1.1.4 Wire to `Middleware/MasterData-API`
 
 ---
 
@@ -107,7 +107,7 @@ Labels (GitHub): `type:epic` · `type:feature` · `type:story` · `area:*`
   - S5.1.1.1 App shell + role-oriented nav (analyst / risk / data manager)
   - S5.1.1.2 Browse / filter reference data from Iceberg-backed APIs
   - S5.1.1.3 Ad-hoc query / saved views (scope TBD in brainstorm)
-  - S5.1.1.4 Wire to `Middleware/API-Services`
+  - S5.1.1.4 Wire to `Middleware/MasterData-API`
 
 ---
 
@@ -132,7 +132,7 @@ CICD/Local/
   all-status.sh
   Kafka/docker-compose.yaml
 Middleware/
-  API-Services/
+  MasterData-API/
   DAGs/                 # mounted into Airflow
 Portals/
   Airlines-RD-Admin/

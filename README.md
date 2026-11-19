@@ -48,7 +48,7 @@ Delivery follows **[Superpowers](https://github.com/obra/superpowers)** (design 
 
 ```
 Portals/Airlines-RD-Admin ──────┐
-                                ├──► Middleware/API-Services ──► MySQL
+                                ├──► Middleware/MasterData-API ──► MySQL
 Portals/Airlines-RD-Intelligence┘              │
                                                ├── RabbitMQ (async / notifications)
                                                └── read APIs ──► Iceberg / query façade
@@ -85,7 +85,7 @@ CICD/Local/
   all-status.sh
   Kafka/docker-compose.yaml
 Middleware/
-  API-Services/
+  MasterData-API/
   DAGs/
 Portals/
   Airlines-RD-Admin/
@@ -108,7 +108,7 @@ cloudformation/
 | M01 | Foundation & Superpowers | ARFD methodology, docs, skeleton |
 | M02 | Runtime bootstrap | Lifecycle scripts + MySQL, Kafka, RabbitMQ, Airflow, object storage |
 | M03 | CDC → Iceberg | Debezium + Airflow DAGs → Iceberg |
-| M04 | Middleware | API-Services + DAG packaging |
+| M04 | Middleware | MasterData-API + DAG packaging |
 | M05 | Airlines-RD-Admin | RefData admin portal |
 | M06 | Airlines-RD-Intelligence | Analyst / risk / data-manager portal |
 | M07 | AWS deployment | Managed-service stack aligned with the Architecture Blog |

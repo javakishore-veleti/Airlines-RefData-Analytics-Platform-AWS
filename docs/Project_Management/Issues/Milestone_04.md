@@ -72,10 +72,10 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #56 | 4 | `/verification-before-completion Story #56` | In progress | 2026-11-19 18:06 | - |
 | #56 | 5 | `/arfd-commit-push 56` | Planned | - | - |
 | #56 | 6 | `/arfd-story-complete 56` | Planned | - | - |
-| #31 | 1 | `/arfd-story-start 31` | Planned | - | - |
-| #31 | 2 | `/brainstorming Story #31: scaffold Middleware/MasterData-API with health through api→facade→WF→task→dao` | Planned | - | - |
-| #31 | 3 | `/using-git-worktrees Story #31: branch m04-0003-masterdata-api-skeleton` | Planned | - | - |
-| #31 | 4 | `/writing-plans Story #31` | Planned | - | - |
+| #31 | 1 | `/arfd-story-start 31` | Done | 2026-11-19 18:07 | 2026-11-19 18:07 |
+| #31 | 2 | `/brainstorming Story #31: scaffold Middleware/MasterData-API with health through api→facade→WF→task→dao` | Done | 2026-11-19 18:07 | 2026-11-19 18:07 |
+| #31 | 3 | `/using-git-worktrees Story #31: branch m04-0003-masterdata-api-skeleton` | Done | 2026-11-19 18:07 | 2026-11-19 18:07 |
+| #31 | 4 | `/writing-plans Story #31` | In progress | 2026-11-19 18:07 | - |
 | #31 | 5 | `/test-driven-development Story #31` | Planned | - | - |
 | #31 | 6 | `/subagent-driven-development Story #31` | Planned | - | - |
 | #31 | 7 | `/arfd-commit-push 31` after every task (repeat) | Planned | - | - |

@@ -36,7 +36,7 @@ Decisions are numbered `D##`. Record new ones here when brainstorming closes the
 **Decision:**
 
 1. **Seed** — `scripts/seed_market_rules.py` loads **1,000,000** synthetic `market_rule` rows by default (`--count` / `--batch-size` / `--truncate` overrides). Schema matches `CICD/Local/MySQL/init/01-market_db.sql` and `sql/01-source-aurora-mysql.sql`. Connection via `ARFD_MYSQL_*` (see `CICD/Local/.env.example`).
-2. **CDC generator API** — `Middleware/API-Services` exposes `GET /health` and `POST /admin/cdc/generate` with `{ "count": N }` to apply mixed INSERT/UPDATE/DELETE against `market_rule` so Debezium can observe change events.
+2. **CDC generator API** — `Middleware/MasterData-API` exposes `GET /health` and `POST /admin/cdc/generate` with `{ "count": N }` to apply mixed INSERT/UPDATE/DELETE against `market_rule` so Debezium can observe change events.
 3. **Admin UI** — `Portals/Airlines-RD-Admin/index.html` provides a **Generate CDC events** control that calls that API.
 
 **Out of scope for D2:** Debezium connector registration and Iceberg apply (Milestone M03).

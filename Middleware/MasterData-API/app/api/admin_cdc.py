@@ -1,28 +1,21 @@
-"""Minimal FastAPI for M02: health + CDC event generator (D2)."""
+"""M02-compatible CDC generate endpoint (full WF layering lands in #32)."""
 
 from __future__ import annotations
 
-import os
 import random
 from datetime import UTC, datetime
-from typing import Any
 
 import pymysql
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
+
+from app.config import get_settings
+
+router = APIRouter(tags=["admin-cdc"])
 
 AIRPORTS = [
     "ORD", "SFO", "LAX", "JFK", "ATL", "DFW", "DEN", "SEA", "MIA", "BOS",
 ]
-
-app = FastAPI(title="ARFD Middleware API-Services", version="0.2.0")
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 class GenerateCdcRequest(BaseModel):
@@ -38,37 +31,21 @@ class GenerateCdcResponse(BaseModel):
 
 
 def _mysql_conn():
+    s = get_settings()
     return pymysql.connect(
-        host=os.environ.get("ARFD_MYSQL_HOST", "127.0.0.1"),
-        port=int(os.environ.get("ARFD_MYSQL_PORT", "3306")),
-        user=os.environ.get("ARFD_MYSQL_USER", "arfd"),
-        password=os.environ.get("ARFD_MYSQL_PASSWORD", "arfd"),
-        database=os.environ.get("ARFD_MYSQL_DATABASE", "market_db"),
+        host=s.mysql_host,
+        port=s.mysql_port,
+        user=s.mysql_user,
+        password=s.mysql_password,
+        database=s.mysql_database,
         charset="utf8mb4",
         autocommit=False,
     )
 
 
-@app.get("/health")
-def health() -> dict[str, Any]:
-    mysql_ok = False
-    try:
-        conn = _mysql_conn()
-        try:
-            with conn.cursor() as cur:
-                cur.execute("SELECT 1")
-                cur.fetchone()
-            mysql_ok = True
-        finally:
-            conn.close()
-    except Exception as exc:  # noqa: BLE001 — surface status only
-        return {"status": "degraded", "mysql": False, "detail": str(exc)}
-    return {"status": "ok" if mysql_ok else "degraded", "mysql": mysql_ok}
-
-
-@app.post("/admin/cdc/generate", response_model=GenerateCdcResponse)
+@router.post("/admin/cdc/generate", response_model=GenerateCdcResponse)
 def generate_cdc(body: GenerateCdcRequest) -> GenerateCdcResponse:
-    """Insert and update market_rule rows to produce Debezium CDC events."""
+    """Insert/update/delete market_rule rows to produce Debezium CDC events."""
     try:
         conn = _mysql_conn()
     except Exception as exc:  # noqa: BLE001
@@ -80,7 +57,6 @@ def generate_cdc(body: GenerateCdcRequest) -> GenerateCdcResponse:
     now = datetime.now(UTC).replace(tzinfo=None)
     try:
         with conn.cursor() as cur:
-            # Mixed CDC ops: ~40% INSERT, ~40% UPDATE, ~20% DELETE (remainder → INSERT).
             insert_budget = max(1, (body.count * 2) // 5)
             update_budget = (body.count * 2) // 5
             delete_budget = body.count - insert_budget - update_budget
@@ -103,7 +79,6 @@ def generate_cdc(body: GenerateCdcRequest) -> GenerateCdcResponse:
                 for rule_id in delete_ids:
                     cur.execute("DELETE FROM market_rule WHERE rule_id = %s", (rule_id,))
                     deleted += cur.rowcount
-                # Convert unmet update/delete budget into inserts
                 insert_budget += (update_budget - len(update_ids)) + (delete_budget - len(delete_ids))
 
             for i in range(insert_budget):
@@ -144,7 +119,3 @@ def generate_cdc(body: GenerateCdcRequest) -> GenerateCdcResponse:
         deleted=deleted,
         message=f"Generated {total} MySQL writes for CDC (insert/update/delete)",
     )
-
-
-def create_app() -> FastAPI:
-    return app
