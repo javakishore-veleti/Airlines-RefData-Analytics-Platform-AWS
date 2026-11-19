@@ -1,0 +1,26 @@
+---
+name: arfd-commit-push
+description: Commits and pushes ARFD (Airlines Reference Data) work as the repository owner after checks pass. Use after every Superpowers plan task or sub-task of a story, at the logical end of a story, and when the user runs /arfd-commit-push. Wrapper around git; Superpowers still owns design/plan/TDD.
+---
+
+# arfd-commit-push
+
+**Role:** ARFD board/git wrapper. Commits the work produced by **native Superpowers** tasks. Does not replace `/writing-plans`, `/test-driven-development`, or `/subagent-driven-development`.
+
+Input: optional story issue number `N` (`/arfd-commit-push 55`). Without it, use the story started in this chat (`/arfd-story-start`); if there is none, ask which story the change belongs to, or use the `M0N: <summary>` form for work not tied to one story.
+
+Commit small and often: after each plan task, each passing test with its code, each migration, each document change, and at the end of every story. One logical change per commit.
+
+0. With `N`, read: `gh issue view N --json title,milestone`. Use the `M0N-00NN` key at the start of the title. If product code is in the staged set (`Middleware/`, `Portals/`, `CICD/Local/` service compose, Airflow DAGs, feature tests) and `milestone` is null, **STOP** — do not commit; attach the issue to a GitHub Milestone first (same hard gate as `arfd-story-start` and `.cursor/rules/no-coding-without-github-issue.mdc`).
+1. `git status -s`. Stage only the files this change touched, by name. Never `git add -A` or `git add .`. Never stage datasets (`*.csv`, `*.zip`), `.env` files, secrets or `runtime_data/`. If a `docs/Project_Management/Issues/Milestone_*.md` is modified (an `arfd-milestone-log` change), stage it too. Stage the story's spec and plan files in `docs/Superpowers/` as well.
+2. If project lint/test entrypoints exist and this change touched product code, run them from the repo root. Do not commit on a failure.
+3. Commit with a single-line message (no body): `M0N-00NN #N: <imperative summary>`. The key `M0N-00NN` is at the start of the story title. For work not tied to one story use `M0N: <summary>`.
+4. The author must be the repository owner as set in `git config user.name` and `git config user.email` (check them), never Cursor or any AI. Do not pass `--author` and do not change `git config`.
+5. Cursor's git wrapper may add a `Co-authored-by` trailer. Check with `git log -1 --format='%an <%ae>%n%B'`. If the body has any `Co-authored-by`, `cursoragent@cursor.com` or other AI trailer, rebuild the commit before pushing:
+   ```bash
+   NEW=$(git commit-tree "$(git rev-parse 'HEAD^{tree}')" -p HEAD^ -m "$(git log -1 --format=%s)")
+   git update-ref "refs/heads/$(git branch --show-current)" "$NEW"
+   ```
+   Then check the log again.
+6. `git push origin "$(git branch --show-current)"`. If rejected, `git pull --rebase origin "$(git branch --show-current)"`, then push again.
+7. Confirm with `git status -sb` that the branch is not ahead. Report the short hash and subject.

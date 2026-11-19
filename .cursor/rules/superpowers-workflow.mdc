@@ -1,0 +1,20 @@
+---
+description: Enforce Superpowers methodology — one ARFD milestone at a time
+alwaysApply: true
+---
+
+# Superpowers + ARFD workflow (mandatory)
+
+Before any creative or implementation work on this repo:
+
+1. Follow **native Superpowers** skills (plugin enabled in `.cursor/settings.json`, also vendored under `superpowers/skills/`)
+2. For new features / architecture / portals / infra: `/brainstorming` first
+3. After design approval: `/writing-plans` → `/using-git-worktrees` → execute with TDD → review → `/finishing-a-development-branch`
+4. Use **ARFD wrappers** only for board/git/milestone logging: `/arfd-story-start`, `/arfd-milestone-log`, `/arfd-commit-push`, `/arfd-story-complete`, etc. They do **not** replace Superpowers natives
+5. Work **one GitHub milestone at a time** (M01 → M02 → …)
+6. Do **not** create AWS CloudFormation stacks or provision paid AWS resources until Milestone M07 is active and explicitly approved
+7. Prefer local Docker under `CICD/Local/` for Phase 1
+
+Hard gate: `.cursor/rules/no-coding-without-github-issue.mdc`
+
+Roadmap: `docs/ROADMAP.md`
