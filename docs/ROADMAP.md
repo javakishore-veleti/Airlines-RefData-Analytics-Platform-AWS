@@ -71,9 +71,10 @@ Labels (GitHub): `type:epic` · `type:feature` · `type:story` · `area:*`
 **Goal:** API layer + DAG contracts for portals and pipeline control.
 
 ### Epic E3.1 — API Services
-- **Feature F3.1.1 — `Middleware/API-Services`**
-  - S3.1.1.1 Service skeleton (health, config, OpenAPI)
-  - S3.1.1.2 Reference-data CRUD / publish APIs against MySQL (admin path)
+- **Feature F3.1.1 — `Middleware/MasterData-API`** (modular monolith; split later by deploy cadence)
+  - S3.1.1.0 D3 architecture + root `package.json` `local:containers:*` / `local:middleware:*`
+  - S3.1.1.1 Service skeleton (health through api→facade→WF→task→dao, config, OpenAPI, `app-*.sh`)
+  - S3.1.1.2 Reference-data CRUD / publish APIs against MySQL (admin path; includes GenerateCdcEvents)
   - S3.1.1.3 Read APIs over Iceberg / query façade for Intelligence portal
   - S3.1.1.4 RabbitMQ integration for async jobs / notifications
 

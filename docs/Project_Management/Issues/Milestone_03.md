@@ -114,4 +114,4 @@ See `Milestone_01.md` section 4 for the full `/arfd-*` command table. Same skill
 ## 5. Notes
 
 - Hard gate: open `[Story]` + GitHub Milestone + `/arfd-story-start N` before product code.
-- Run milestones in order; do not start the next milestone until this one is complete (or explicitly parallelized by the team).
+- Run milestones in order; do not start the next milestone until this one is complete (or explicitly parallelized by the team). M04 board stories (#31, #55, #56, …) may exist ahead of time but product work starts only after M03 completes (or explicit parallel) **and** `/arfd-story-start N`.

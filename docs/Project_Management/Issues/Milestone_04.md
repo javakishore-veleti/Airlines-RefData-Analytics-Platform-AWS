@@ -1,8 +1,8 @@
 # Milestone M04 - Middleware
 
-**Scope:** API services for portals and stable DAG packaging for the orchestration runtime.
+**Scope:** MasterData-API (FastAPI modular monolith under `Middleware/MasterData-API/`), root npm operator scripts for containers/middleware, and stable DAG packaging for the orchestration runtime.
 
-**Status:** open. Epic #29; 2 features; 6 stories. 0 done; 6 left to build.
+**Status:** open. Epic #29; 2 features; 8 stories. 0 done; 8 left to build.
 
 How to read this file:
 - `#N` is the GitHub issue number. The `M0N-00NN` key is the sequence tag at the start of the issue title.
@@ -23,13 +23,15 @@ How to read this file:
 |---|---|---|---|---|---|
 | 1 | #29 | M04-0001 | Epic | Middleware | Parent of the features below |
 | 2 | #30 | M04-0002 | Feature | API Services | Parent of the stories below |
-| 3 | #31 | M04-0003 | Story | API service skeleton (health, config, OpenAPI) | API foundation |
-| 4 | #32 | M04-0004 | Story | Reference-data write APIs for Admin | Admin needs writes |
-| 5 | #33 | M04-0005 | Story | Lake read / query façade for Intelligence | Intelligence needs reads |
-| 6 | #34 | M04-0006 | Story | Async messaging integration | Decouple portal/API work |
-| 7 | #35 | M04-0007 | Feature | DAG packaging | Parent of the stories below |
-| 8 | #36 | M04-0008 | Story | Document Middleware/DAGs mount contract | Stable path |
-| 9 | #37 | M04-0009 | Story | Shared CDC parse and lake writer libraries | Reuse across jobs |
+| 3 | #56 | M04-0011 | Story | Record D3 MasterData-API architecture in DESIGN.md | Lock conventions before code |
+| 4 | #31 | M04-0003 | Story | MasterData-API skeleton (health, config, OpenAPI, layering) | API project root + Health through layers |
+| 5 | #55 | M04-0010 | Story | Root package.json local containers and middleware scripts | Operator npm entrypoints |
+| 6 | #32 | M04-0004 | Story | Reference-data write APIs for Admin (incl. GenerateCdcEvents) | Admin writes + CDC generate |
+| 7 | #33 | M04-0005 | Story | Lake read / query façade for Intelligence | Intelligence needs reads |
+| 8 | #34 | M04-0006 | Story | Async messaging integration | Decouple portal/API work |
+| 9 | #35 | M04-0007 | Feature | DAG packaging | Parent of the stories below |
+| 10 | #36 | M04-0008 | Story | Document Middleware/DAGs mount contract | Stable path |
+| 11 | #37 | M04-0009 | Story | Shared CDC parse and lake writer libraries | Reuse across jobs |
 
 ## 2. The same issues grouped by epic and feature
 
@@ -37,8 +39,10 @@ How to read this file:
 Epic #29  M04-0001  Middleware
 |
 +-- Feature #30  M04-0002  API Services
-|     +-- #31  API service skeleton (health, config, OpenAPI)
-|     +-- #32  Reference-data write APIs for Admin
+|     +-- #56  Record D3 MasterData-API architecture in DESIGN.md
+|     +-- #31  MasterData-API skeleton (health, config, OpenAPI, layering)
+|     +-- #55  Root package.json local containers and middleware scripts
+|     +-- #32  Reference-data write APIs for Admin (incl. GenerateCdcEvents)
 |     +-- #33  Lake read / query façade for Intelligence
 |     +-- #34  Async messaging integration
 +-- Feature #35  M04-0007  DAG packaging
@@ -52,9 +56,15 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 
 | Issue | Step | Command | Status | Started | Completed |
 |---|---|---|---|---|---|
-| #31 | 1 | `/arfd-story-start 31` | In progress | - | - |
-| #31 | 2 | `/brainstorming Story #31: scaffold Middleware/API-Services with health, config, OpenAPI` | Planned | - | - |
-| #31 | 3 | `/using-git-worktrees Story #31: branch m04-0003-api-skeleton` | Planned | - | - |
+| #56 | 1 | `/arfd-story-start 56` | Planned | - | - |
+| #56 | 2 | `/brainstorming Story #56: finalize D3 MasterData-API architecture (project root, WF naming, Ctx/Req/Resp, object_factory, app-*.sh, npm discovery)` | Planned | - | - |
+| #56 | 3 | `/writing-plans Story #56` | Planned | - | - |
+| #56 | 4 | `/verification-before-completion Story #56` | Planned | - | - |
+| #56 | 5 | `/arfd-commit-push 56` | Planned | - | - |
+| #56 | 6 | `/arfd-story-complete 56` | Planned | - | - |
+| #31 | 1 | `/arfd-story-start 31` | Planned | - | - |
+| #31 | 2 | `/brainstorming Story #31: scaffold Middleware/MasterData-API with health through api→facade→WF→task→dao, config, OpenAPI, object_factory` | Planned | - | - |
+| #31 | 3 | `/using-git-worktrees Story #31: branch m04-0003-masterdata-api-skeleton` | Planned | - | - |
 | #31 | 4 | `/writing-plans Story #31` | Planned | - | - |
 | #31 | 5 | `/test-driven-development Story #31` | Planned | - | - |
 | #31 | 6 | `/subagent-driven-development Story #31` | Planned | - | - |
@@ -64,8 +74,20 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #31 | 10 | `/arfd-commit-push 31` | Planned | - | - |
 | #31 | 11 | `/finishing-a-development-branch Story #31` | Planned | - | - |
 | #31 | 12 | `/arfd-story-complete 31` | Planned | - | - |
+| #55 | 1 | `/arfd-story-start 55` | Planned | - | - |
+| #55 | 2 | `/brainstorming Story #55: root package.json local:containers and local:middleware scripts scanning Middleware/*/app-*.sh` | Planned | - | - |
+| #55 | 3 | `/using-git-worktrees Story #55: branch m04-0010-npm-local-scripts` | Planned | - | - |
+| #55 | 4 | `/writing-plans Story #55` | Planned | - | - |
+| #55 | 5 | `/test-driven-development Story #55` | Planned | - | - |
+| #55 | 6 | `/subagent-driven-development Story #55` | Planned | - | - |
+| #55 | 7 | `/arfd-commit-push 55` after every task (repeat) | Planned | - | - |
+| #55 | 8 | `/verification-before-completion Story #55` | Planned | - | - |
+| #55 | 9 | `/requesting-code-review Story #55` | Planned | - | - |
+| #55 | 10 | `/arfd-commit-push 55` | Planned | - | - |
+| #55 | 11 | `/finishing-a-development-branch Story #55` | Planned | - | - |
+| #55 | 12 | `/arfd-story-complete 55` | Planned | - | - |
 | #32 | 1 | `/arfd-story-start 32` | Planned | - | - |
-| #32 | 2 | `/brainstorming Story #32: design RefData write APIs for Airlines-RD-Admin` | Planned | - | - |
+| #32 | 2 | `/brainstorming Story #32: design RefData write APIs and GenerateCdcEvents WF for Airlines-RD-Admin` | Planned | - | - |
 | #32 | 3 | `/using-git-worktrees Story #32: branch m04-0004-refdata-write-apis` | Planned | - | - |
 | #32 | 4 | `/writing-plans Story #32` | Planned | - | - |
 | #32 | 5 | `/test-driven-development Story #32` | Planned | - | - |
@@ -89,7 +111,7 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #33 | 11 | `/finishing-a-development-branch Story #33` | Planned | - | - |
 | #33 | 12 | `/arfd-story-complete 33` | Planned | - | - |
 | #34 | 1 | `/arfd-story-start 34` | Planned | - | - |
-| #34 | 2 | `/brainstorming Story #34: integrate async messaging for ARFD middleware` | Planned | - | - |
+| #34 | 2 | `/brainstorming Story #34: integrate async messaging for ARFD MasterData-API` | Planned | - | - |
 | #34 | 3 | `/using-git-worktrees Story #34: branch m04-0006-async-messaging` | Planned | - | - |
 | #34 | 4 | `/writing-plans Story #34` | Planned | - | - |
 | #34 | 5 | `/test-driven-development Story #34` | Planned | - | - |
@@ -127,5 +149,7 @@ See `Milestone_01.md` section 4 for the full `/arfd-*` command table. Same skill
 
 ## 5. Notes
 
-- Hard gate: open `[Story]` + GitHub Milestone + `/arfd-story-start N` before product code.
-- Run milestones in order; do not start the next milestone until this one is complete (or explicitly parallelized by the team).
+- **Prerequisite:** Complete Milestone M03 (or explicitly parallelize) before starting M04 product stories. Board stories may be created ahead of time.
+- **Hard gate:** open `[Story]` + GitHub Milestone + `/arfd-story-start N` before product code. Agent-created issues do not authorize coding until the user story-starts.
+- **No vibe coding:** every change follows Section 3 Superpowers natives; `/arfd-*` only logs board/git/milestone state.
+- **MasterData-API:** Python project root at `Middleware/MasterData-API/`. Use **WF** (not Workflow) in folder and class names. Split into more microservices later by complexity/deploy cadence; each new service gets `app-startup.sh` / `app-status.sh` / `app-shutdown.sh` for npm `local:middleware:all:*` convention scan.
