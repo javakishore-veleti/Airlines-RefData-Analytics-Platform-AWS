@@ -2,7 +2,7 @@
 
 **Scope:** ARFD methodology (Superpowers + `/arfd-*` wrappers), product docs alignment, and repository skeleton for CICD, Middleware, and Portals. No AWS stack creates in this milestone.
 
-**Status:** open. Epic #1; features #2, #6; 6 stories. 2 done; 4 left to build.
+**Status:** open. Epic #1; features #2, #6; 6 stories. 3 done; 3 left to build.
 
 How to read this file:
 - `#1` is the GitHub issue number. The `M01-00NN` key is the sequence tag at the start of the issue title. Keys are not in build order.
@@ -122,18 +122,18 @@ If a test fails and you do not know why, run `/systematic-debugging Story #N` be
 | #8 | 10 | `/arfd-commit-push 8` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
 | #8 | 11 | `/finishing-a-development-branch Story #8` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
 | #8 | 12 | `/arfd-story-complete 8` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
-| #9 | 1 | `/arfd-story-start 9` | Planned | - | - |
-| #9 | 2 | `/brainstorming Story #9: add Airlines-RD-Admin and Airlines-RD-Intelligence portal placeholders` | Planned | - | - |
-| #9 | 3 | `/using-git-worktrees Story #9: branch m01-0009-portals-path-stubs` | Planned | - | - |
-| #9 | 4 | `/writing-plans Story #9` | Planned | - | - |
-| #9 | 5 | `/test-driven-development Story #9` | Planned | - | - |
-| #9 | 6 | `/subagent-driven-development Story #9` | Planned | - | - |
-| #9 | 7 | `/arfd-commit-push 9` after every task (repeat) | Planned | - | - |
-| #9 | 8 | `/verification-before-completion Story #9` | Planned | - | - |
-| #9 | 9 | `/requesting-code-review Story #9` | Planned | - | - |
-| #9 | 10 | `/arfd-commit-push 9` | Planned | - | - |
-| #9 | 11 | `/finishing-a-development-branch Story #9` | Planned | - | - |
-| #9 | 12 | `/arfd-story-complete 9` | Planned | - | - |
+| #9 | 1 | `/arfd-story-start 9` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
+| #9 | 2 | `/brainstorming Story #9: add Airlines-RD-Admin and Airlines-RD-Intelligence portal placeholders` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
+| #9 | 3 | `/using-git-worktrees Story #9: branch m01-0009-portals-path-stubs` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
+| #9 | 4 | `/writing-plans Story #9` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
+| #9 | 5 | `/test-driven-development Story #9` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
+| #9 | 6 | `/subagent-driven-development Story #9` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
+| #9 | 7 | `/arfd-commit-push 9` after every task (repeat) | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
+| #9 | 8 | `/verification-before-completion Story #9` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
+| #9 | 9 | `/requesting-code-review Story #9` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
+| #9 | 10 | `/arfd-commit-push 9` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
+| #9 | 11 | `/finishing-a-development-branch Story #9` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
+| #9 | 12 | `/arfd-story-complete 9` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
 | Feature #2 | 1 | `/arfd-feature-complete 2` | Planned | - | - |
 | Feature #6 | 1 | `/arfd-feature-complete 6` | Planned | - | - |
 | Epic #1 | 1 | `/arfd-epic-complete 1` | Planned | - | - |
