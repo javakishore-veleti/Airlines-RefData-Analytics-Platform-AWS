@@ -51,7 +51,24 @@ cp .env.example .env   # optional overrides
 
 ### CDC prerequisites (MySQL)
 
-Expect `binlog_format=ROW`, `binlog_row_image=FULL`, `binlog_checksum=NONE` (set in `MySQL/docker-compose.yaml`). User `arfd` is granted `REPLICATION SLAVE` / `REPLICATION CLIENT` for Debezium (wired in M03).
+Expect `binlog_format=ROW`, `binlog_row_image=FULL`, `binlog_checksum=NONE` (set in `MySQL/docker-compose.yaml`). User `arfd` is granted `REPLICATION SLAVE` / `REPLICATION CLIENT` for Debezium.
+
+### Register Debezium connector for `market_rule` (M03 / D4)
+
+Connect reaches MySQL via `host.docker.internal` (see `Kafka/docker-compose.yaml` `extra_hosts`). Set `ARFD_MYSQL_PORT` in `.env` if MySQL is not on 3306.
+
+```bash
+# After docker-all-up (MySQL + Kafka/Connect healthy)
+cd CICD/Local/Kafka
+./register-market-rule-connector.sh
+# Expect connector state RUNNING
+curl -s http://127.0.0.1:8083/connectors/arfd-market-rule-mysql/status | python3 -m json.tool
+
+# Smoke: write rows then consume (topic arfd.market_db.market_rule)
+# e.g. POST /admin/cdc/generate or SQL against market_db.market_rule
+```
+
+Config checked in: `Kafka/connectors/market-rule-mysql.json`.
 
 ### Reused Airflow — DAG attach
 
