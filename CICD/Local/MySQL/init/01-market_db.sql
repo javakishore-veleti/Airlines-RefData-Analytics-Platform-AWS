@@ -13,7 +13,9 @@ CREATE TABLE IF NOT EXISTS market_rule (
     market_from VARCHAR(30) NOT NULL,
     market_to VARCHAR(30) NOT NULL,
     created_at DATETIME(6),
-    updated_at DATETIME(6)
+    updated_at DATETIME(6),
+    KEY idx_market_rule_status (status),
+    KEY idx_market_rule_markets (market_from, market_to)
 );
 
 CREATE USER IF NOT EXISTS 'arfd'@'%' IDENTIFIED BY 'arfd';

@@ -31,19 +31,6 @@ done
 
 echo "ARFD: all-down (including-shared=${INCLUDING_SHARED})"
 
-should_stop_shared() {
-  local name="$1"
-  local recorded
-  recorded="$(state_get "${name}")"
-  if [[ "${recorded}" == "managed-by-arfd" ]]; then
-    return 0
-  fi
-  if [[ "${INCLUDING_SHARED}" -eq 1 && "${recorded}" == "reused" ]]; then
-    return 0
-  fi
-  return 1
-}
-
 # Always stop ARFD platform compose stacks (Kafka, RabbitMQ, MinIO).
 echo "  stopping Kafka/Debezium compose..."
 compose_down "${SCRIPT_DIR}/Kafka" || true

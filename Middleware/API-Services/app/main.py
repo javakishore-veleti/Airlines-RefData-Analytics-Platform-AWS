@@ -1,17 +1,22 @@
-"""ARFD Middleware API — health + CDC event generator for Admin."""
+"""Minimal FastAPI for M02: health + CDC event generator (D2)."""
+
 from __future__ import annotations
 
 import os
 import random
 from datetime import datetime
-from typing import Literal
+from typing import Any
 
-import mysql.connector
+import pymysql
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-app = FastAPI(title="ARFD API Services", version="0.1.0")
+AIRPORTS = [
+    "ORD", "SFO", "LAX", "JFK", "ATL", "DFW", "DEN", "SEA", "MIA", "BOS",
+]
+
+app = FastAPI(title="ARFD Middleware API-Services", version="0.2.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -19,107 +24,127 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-AIRPORTS = ["ORD", "SFO", "LAX", "JFK", "LHR", "CDG", "NRT", "SYD", "DXB", "SIN"]
+
+class GenerateCdcRequest(BaseModel):
+    count: int = Field(..., ge=1, le=100_000, description="Number of CDC-triggering writes")
 
 
-def db():
-    return mysql.connector.connect(
-        host=os.getenv("ARFD_MYSQL_HOST", "127.0.0.1"),
-        port=int(os.getenv("ARFD_MYSQL_PORT", "3306")),
-        user=os.getenv("ARFD_MYSQL_USER", "arfd"),
-        password=os.getenv("ARFD_MYSQL_PASSWORD", "arfd"),
-        database=os.getenv("ARFD_MYSQL_DATABASE", "market_db"),
+class GenerateCdcResponse(BaseModel):
+    requested: int
+    inserted: int
+    updated: int
+    deleted: int
+    message: str
+
+
+def _mysql_conn():
+    return pymysql.connect(
+        host=os.environ.get("ARFD_MYSQL_HOST", "127.0.0.1"),
+        port=int(os.environ.get("ARFD_MYSQL_PORT", "3306")),
+        user=os.environ.get("ARFD_MYSQL_USER", "arfd"),
+        password=os.environ.get("ARFD_MYSQL_PASSWORD", "arfd"),
+        database=os.environ.get("ARFD_MYSQL_DATABASE", "market_db"),
+        charset="utf8mb4",
+        autocommit=False,
     )
 
 
-class GenerateRequest(BaseModel):
-    count: int = Field(ge=1, le=100_000, default=10)
-    mix: Literal["mixed", "insert", "update", "delete"] = "mixed"
-
-
 @app.get("/health")
-def health():
+def health() -> dict[str, Any]:
+    mysql_ok = False
     try:
-        conn = db()
-        cur = conn.cursor()
-        cur.execute("SELECT 1")
-        cur.fetchone()
-        cur.close()
-        conn.close()
-        mysql_ok = True
-    except Exception as exc:  # noqa: BLE001
-        mysql_ok = False
-        return {"status": "degraded", "mysql": False, "error": str(exc)}
-    return {"status": "ok", "mysql": mysql_ok}
+        conn = _mysql_conn()
+        try:
+            with conn.cursor() as cur:
+                cur.execute("SELECT 1")
+                cur.fetchone()
+            mysql_ok = True
+        finally:
+            conn.close()
+    except Exception as exc:  # noqa: BLE001 — surface status only
+        return {"status": "degraded", "mysql": False, "detail": str(exc)}
+    return {"status": "ok" if mysql_ok else "degraded", "mysql": mysql_ok}
 
 
-@app.post("/admin/cdc/generate")
-def generate_cdc(req: GenerateRequest):
-    """Apply N random INSERT/UPDATE/DELETE on market_rule to simulate CDC."""
+@app.post("/admin/cdc/generate", response_model=GenerateCdcResponse)
+def generate_cdc(body: GenerateCdcRequest) -> GenerateCdcResponse:
+    """Insert and update market_rule rows to produce Debezium CDC events."""
     try:
-        conn = db()
+        conn = _mysql_conn()
     except Exception as exc:  # noqa: BLE001
-        raise HTTPException(status_code=503, detail=f"mysql unavailable: {exc}") from exc
+        raise HTTPException(status_code=503, detail=f"MySQL unavailable: {exc}") from exc
 
-    cur = conn.cursor()
-    stats = {"insert": 0, "update": 0, "delete": 0}
+    inserted = 0
+    updated = 0
+    deleted = 0
     now = datetime.utcnow()
+    try:
+        with conn.cursor() as cur:
+            # Mixed CDC ops: ~40% INSERT, ~40% UPDATE, ~20% DELETE (remainder → INSERT).
+            insert_budget = max(1, (body.count * 2) // 5)
+            update_budget = (body.count * 2) // 5
+            delete_budget = body.count - insert_budget - update_budget
 
-    for _ in range(req.count):
-        op = req.mix
-        if op == "mixed":
-            op = random.choice(["insert", "update", "delete"])
+            if update_budget or delete_budget:
+                need = update_budget + delete_budget
+                cur.execute(
+                    "SELECT rule_id FROM market_rule ORDER BY rule_id DESC LIMIT %s",
+                    (need,),
+                )
+                ids = [row[0] for row in cur.fetchall()]
+                update_ids = ids[: min(update_budget, len(ids))]
+                delete_ids = ids[len(update_ids) : len(update_ids) + delete_budget]
+                for rule_id in update_ids:
+                    cur.execute(
+                        "UPDATE market_rule SET weight = %s, updated_at = %s WHERE rule_id = %s",
+                        (random.randint(1, 500), now, rule_id),
+                    )
+                    updated += cur.rowcount
+                for rule_id in delete_ids:
+                    cur.execute("DELETE FROM market_rule WHERE rule_id = %s", (rule_id,))
+                    deleted += cur.rowcount
+                # Convert unmet update/delete budget into inserts
+                insert_budget += (update_budget - len(update_ids)) + (delete_budget - len(delete_ids))
 
-        if op == "insert":
-            a, b = random.sample(AIRPORTS, 2)
-            cur.execute(
-                "INSERT INTO market_rule "
-                "(name, weight, status, effective_from, market_from, market_to, created_at, updated_at) "
-                "VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
-                (
-                    f"{a}-{b} CDC {random.randint(1, 1_000_000)}",
-                    random.randint(1, 100),
-                    "ACTIVE",
-                    now,
-                    a,
-                    b,
-                    now,
-                    now,
-                ),
-            )
-            stats["insert"] += 1
-        elif op == "update":
-            cur.execute("SELECT rule_id FROM market_rule ORDER BY RAND() LIMIT 1")
-            row = cur.fetchone()
-            if not row:
-                continue
-            cur.execute(
-                "UPDATE market_rule SET weight=%s, updated_at=%s WHERE rule_id=%s",
-                (random.randint(1, 100), now, row[0]),
-            )
-            stats["update"] += 1
-        else:
-            cur.execute("SELECT rule_id FROM market_rule ORDER BY RAND() LIMIT 1")
-            row = cur.fetchone()
-            if not row:
-                continue
-            cur.execute("DELETE FROM market_rule WHERE rule_id=%s", (row[0],))
-            stats["delete"] += 1
+            for i in range(insert_budget):
+                a = AIRPORTS[i % len(AIRPORTS)]
+                b = AIRPORTS[(i * 3) % len(AIRPORTS)]
+                if a == b:
+                    b = AIRPORTS[(i + 1) % len(AIRPORTS)]
+                cur.execute(
+                    """
+                    INSERT INTO market_rule
+                    (name, weight, status, effective_from, market_from, market_to, created_at, updated_at)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    """,
+                    (
+                        f"CDC Gen {a}-{b} {now.strftime('%Y%m%d%H%M%S')}-{i}",
+                        random.randint(1, 200),
+                        "ACTIVE",
+                        now,
+                        a,
+                        b,
+                        now,
+                        now,
+                    ),
+                )
+                inserted += 1
+        conn.commit()
+    except Exception as exc:  # noqa: BLE001
+        conn.rollback()
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+    finally:
+        conn.close()
 
-    conn.commit()
-    cur.execute("SELECT COUNT(*) FROM market_rule")
-    total = cur.fetchone()[0]
-    cur.close()
-    conn.close()
-    return {"requested": req.count, "applied": stats, "market_rule_count": total}
+    total = inserted + updated + deleted
+    return GenerateCdcResponse(
+        requested=body.count,
+        inserted=inserted,
+        updated=updated,
+        deleted=deleted,
+        message=f"Generated {total} MySQL writes for CDC (insert/update/delete)",
+    )
 
 
-@app.get("/admin/market-rules/count")
-def market_rule_count():
-    conn = db()
-    cur = conn.cursor()
-    cur.execute("SELECT COUNT(*) FROM market_rule")
-    n = cur.fetchone()[0]
-    cur.close()
-    conn.close()
-    return {"count": n}
+def create_app() -> FastAPI:
+    return app
