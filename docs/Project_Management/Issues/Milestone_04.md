@@ -2,7 +2,7 @@
 
 **Scope:** MasterData-API and AccountService-API (FastAPI project roots under `Middleware/`), root npm operator scripts, and DAG packaging.
 
-**Status:** open. Epic #29; 3 features; 11 stories. 0 done; 11 left to build.
+**Status:** open. Epic #29; 3 features; 11 stories. 2 done; 9 left to build.
 
 How to read this file:
 - `#N` is the GitHub issue number. The `M0N-00NN` key is the sequence tag at the start of the issue title.
@@ -75,15 +75,15 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #31 | 1 | `/arfd-story-start 31` | Done | 2026-11-19 18:07 | 2026-11-19 18:07 |
 | #31 | 2 | `/brainstorming Story #31: scaffold Middleware/MasterData-API with health through api→facade→WF→task→dao` | Done | 2026-11-19 18:07 | 2026-11-19 18:07 |
 | #31 | 3 | `/using-git-worktrees Story #31: branch m04-0003-masterdata-api-skeleton` | Done | 2026-11-19 18:07 | 2026-11-19 18:07 |
-| #31 | 4 | `/writing-plans Story #31` | In progress | 2026-11-19 18:07 | - |
-| #31 | 5 | `/test-driven-development Story #31` | Planned | - | - |
-| #31 | 6 | `/subagent-driven-development Story #31` | Planned | - | - |
-| #31 | 7 | `/arfd-commit-push 31` after every task (repeat) | Planned | - | - |
-| #31 | 8 | `/verification-before-completion Story #31` | Planned | - | - |
-| #31 | 9 | `/requesting-code-review Story #31` | Planned | - | - |
-| #31 | 10 | `/arfd-commit-push 31` | Planned | - | - |
-| #31 | 11 | `/finishing-a-development-branch Story #31` | Planned | - | - |
-| #31 | 12 | `/arfd-story-complete 31` | Planned | - | - |
+| #31 | 4 | `/writing-plans Story #31` | Done | 2026-11-19 18:07 | 2026-11-19 18:10 |
+| #31 | 5 | `/test-driven-development Story #31` | Done | 2026-11-19 18:10 | 2026-11-19 18:10 |
+| #31 | 6 | `/subagent-driven-development Story #31` | Done | 2026-11-19 18:10 | 2026-11-19 18:10 |
+| #31 | 7 | `/arfd-commit-push 31` after every task (repeat) | Done | 2026-11-19 18:10 | 2026-11-19 18:10 |
+| #31 | 8 | `/verification-before-completion Story #31` | Done | 2026-11-19 18:10 | 2026-11-19 18:10 |
+| #31 | 9 | `/requesting-code-review Story #31` | Done | 2026-11-19 18:10 | 2026-11-19 18:10 |
+| #31 | 10 | `/arfd-commit-push 31` | Done | 2026-11-19 18:10 | 2026-11-19 18:10 |
+| #31 | 11 | `/finishing-a-development-branch Story #31` | Done | 2026-11-19 18:10 | 2026-11-19 18:10 |
+| #31 | 12 | `/arfd-story-complete 31` | Done | 2026-11-19 18:10 | 2026-11-19 18:10 |
 | #55 | 1 | `/arfd-story-start 55` | Planned | - | - |
 | #55 | 2 | `/brainstorming Story #55: root package.json local:containers and local:middleware scripts` | Planned | - | - |
 | #55 | 3 | `/using-git-worktrees Story #55: branch m04-0010-npm-local-scripts` | Planned | - | - |
