@@ -20,13 +20,21 @@ def now() -> str:
     return datetime.now().strftime("%Y-%m-%d %H:%M")
 
 
-def milestone_file_for_issue(n: int) -> Path:
+def milestone_file_for_issue(n: int, explicit: str | None = None) -> Path:
+    if explicit:
+        return ROOT / "docs" / "Project_Management" / "Issues" / explicit
+    # Prefer scanning milestone files locally (no network) for #N rows
+    issues_dir = ROOT / "docs" / "Project_Management" / "Issues"
+    for path in sorted(issues_dir.glob("Milestone_*.md")):
+        text = path.read_text()
+        if re.search(rf"\| #{n} \|", text) or re.search(rf"\| Feature #{n} \|", text) or re.search(rf"\| Epic #{n} \|", text):
+            return path
     title = sh(["gh", "issue", "view", str(n), "--json", "title", "--jq", ".title"])
     m = re.match(r"(M\d+)-", title)
     if not m:
         raise SystemExit(f"No M0N prefix on issue #{n}: {title}")
     num = m.group(1)[1:]  # 01
-    return ROOT / "docs" / "Project_Management" / "Issues" / f"Milestone_{num}.md"
+    return issues_dir / f"Milestone_{num}.md"
 
 
 def update_status_counts(text: str) -> str:
@@ -56,8 +64,8 @@ def update_status_counts(text: str) -> str:
     return text
 
 
-def milestone_log(n: int, begin: bool = False) -> None:
-    path = milestone_file_for_issue(n)
+def milestone_log(n: int, begin: bool = False, milestone_file: str | None = None) -> None:
+    path = milestone_file_for_issue(n, explicit=milestone_file)
     lines = path.read_text().splitlines()
     ts = now()
     # Find row indices for this issue
@@ -241,11 +249,22 @@ def story_complete(n: int, summary: str) -> None:
     print(f"completed #{n}")
 
 
-def commit_push(n: int | None, summary: str, files: list[str]) -> None:
-    key = "M01"
+def commit_push(n: int | None, summary: str, files: list[str], key_hint: str | None = None) -> None:
+    key = key_hint or "M01"
+    if n and not key_hint:
+        # Prefer key from staged/local milestone titles when offline
+        for path in (ROOT / "docs" / "Project_Management" / "Issues").glob("Milestone_*.md"):
+            m = re.search(rf"\| #{n} \| (M\d+-\d+) \|", path.read_text())
+            if m:
+                key = m.group(1)
+                break
+        else:
+            try:
+                title = sh(["gh", "issue", "view", str(n), "--json", "title", "--jq", ".title"])
+                key = title.split()[0]
+            except Exception:
+                pass
     if n:
-        title = sh(["gh", "issue", "view", str(n), "--json", "title", "--jq", ".title"])
-        key = title.split()[0]
         msg = f"{key} #{n}: {summary}"
     else:
         msg = f"{key}: {summary}"
@@ -277,23 +296,25 @@ def main() -> None:
     p = sub.add_parser("log")
     p.add_argument("n", type=int)
     p.add_argument("--begin", action="store_true")
+    p.add_argument("--file", default=None, help="Milestone_XX.md filename")
     p = sub.add_parser("sync")
     p.add_argument("n", type=int)
     p = sub.add_parser("commit")
     p.add_argument("n", type=int, nargs="?")
     p.add_argument("--summary", required=True)
     p.add_argument("--files", nargs="+", required=True)
+    p.add_argument("--key", default=None)
     args = ap.parse_args()
     if args.cmd == "start":
         story_start(args.n)
     elif args.cmd == "complete":
         story_complete(args.n, args.summary)
     elif args.cmd == "log":
-        milestone_log(args.n, begin=args.begin)
+        milestone_log(args.n, begin=args.begin, milestone_file=args.file)
     elif args.cmd == "sync":
         progress_sync(args.n)
     elif args.cmd == "commit":
-        commit_push(args.n, args.summary, args.files)
+        commit_push(args.n, args.summary, args.files, key_hint=args.key)
 
 
 if __name__ == "__main__":

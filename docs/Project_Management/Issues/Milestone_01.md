@@ -2,7 +2,7 @@
 
 **Scope:** ARFD methodology (Superpowers + `/arfd-*` wrappers), product docs alignment, and repository skeleton for CICD, Middleware, and Portals. No AWS stack creates in this milestone.
 
-**Status:** open. Epic #1; features #2, #6; 6 stories. 0 done; 6 left to build.
+**Status:** open. Epic #1; features #2, #6; 6 stories. 1 done; 5 left to build.
 
 How to read this file:
 - `#1` is the GitHub issue number. The `M01-00NN` key is the sequence tag at the start of the issue title. Keys are not in build order.
@@ -98,18 +98,18 @@ If a test fails and you do not know why, run `/systematic-debugging Story #N` be
 | #5 | 3 | `/verification-before-completion Story #5` | Done | 2026-11-19 16:26 | 2026-11-19 16:26 |
 | #5 | 4 | `/arfd-commit-push 5` | Done | 2026-11-19 16:26 | 2026-11-19 16:26 |
 | #5 | 5 | `/arfd-story-complete 5` | In progress | 2026-11-19 16:26 | - |
-| #7 | 1 | `/arfd-story-start 7` | Planned | - | - |
-| #7 | 2 | `/brainstorming Story #7: add CICD/Local placeholders for lifecycle scripts and Kafka compose path` | Planned | - | - |
-| #7 | 3 | `/using-git-worktrees Story #7: branch m01-0007-cicd-local-path-stubs` | Planned | - | - |
-| #7 | 4 | `/writing-plans Story #7` | Planned | - | - |
-| #7 | 5 | `/test-driven-development Story #7` | Planned | - | - |
-| #7 | 6 | `/subagent-driven-development Story #7` | Planned | - | - |
-| #7 | 7 | `/arfd-commit-push 7` after every task (repeat) | Planned | - | - |
-| #7 | 8 | `/verification-before-completion Story #7` | Planned | - | - |
-| #7 | 9 | `/requesting-code-review Story #7` | Planned | - | - |
-| #7 | 10 | `/arfd-commit-push 7` | Planned | - | - |
-| #7 | 11 | `/finishing-a-development-branch Story #7` | Planned | - | - |
-| #7 | 12 | `/arfd-story-complete 7` | Planned | - | - |
+| #7 | 1 | `/arfd-story-start 7` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
+| #7 | 2 | `/brainstorming Story #7: add CICD/Local placeholders for lifecycle scripts and Kafka compose path` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
+| #7 | 3 | `/using-git-worktrees Story #7: branch m01-0007-cicd-local-path-stubs` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
+| #7 | 4 | `/writing-plans Story #7` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
+| #7 | 5 | `/test-driven-development Story #7` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
+| #7 | 6 | `/subagent-driven-development Story #7` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
+| #7 | 7 | `/arfd-commit-push 7` after every task (repeat) | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
+| #7 | 8 | `/verification-before-completion Story #7` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
+| #7 | 9 | `/requesting-code-review Story #7` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
+| #7 | 10 | `/arfd-commit-push 7` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
+| #7 | 11 | `/finishing-a-development-branch Story #7` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
+| #7 | 12 | `/arfd-story-complete 7` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
 | #8 | 1 | `/arfd-story-start 8` | Planned | - | - |
 | #8 | 2 | `/brainstorming Story #8: add Middleware/API-Services and Middleware/DAGs placeholders` | Planned | - | - |
 | #8 | 3 | `/using-git-worktrees Story #8: branch m01-0008-middleware-path-stubs` | Planned | - | - |
