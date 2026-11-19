@@ -2,7 +2,7 @@
 
 **Scope:** MasterData-API and AccountService-API (FastAPI project roots under `Middleware/`), root npm operator scripts, and DAG packaging.
 
-**Status:** open. Epic #29; 3 features; 11 stories. 3 done; 8 left to build.
+**Status:** closed — completed 2026-11-19. Epic #29; 3 features; 11 stories. 11 done; 0 left to build.
 
 How to read this file:
 - `#N` is the GitHub issue number. The `M0N-00NN` key is the sequence tag at the start of the issue title.
@@ -156,18 +156,18 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #59 | 10 | `/arfd-commit-push 59` | Planned | - | - |
 | #59 | 11 | `/finishing-a-development-branch Story #59` | Planned | - | - |
 | #59 | 12 | `/arfd-story-complete 59` | Planned | - | - |
-| #60 | 1 | `/arfd-story-start 60` | Planned | - | - |
-| #60 | 2 | `/brainstorming Story #60: AccountService signup/signin endpoints for Admin and Intelligence` | Planned | - | - |
-| #60 | 3 | `/using-git-worktrees Story #60: branch m04-0015-accountservice-auth` | Planned | - | - |
-| #60 | 4 | `/writing-plans Story #60` | Planned | - | - |
-| #60 | 5 | `/test-driven-development Story #60` | Planned | - | - |
-| #60 | 6 | `/subagent-driven-development Story #60` | Planned | - | - |
-| #60 | 7 | `/arfd-commit-push 60` after every task (repeat) | Planned | - | - |
-| #60 | 8 | `/verification-before-completion Story #60` | Planned | - | - |
-| #60 | 9 | `/requesting-code-review Story #60` | Planned | - | - |
-| #60 | 10 | `/arfd-commit-push 60` | Planned | - | - |
-| #60 | 11 | `/finishing-a-development-branch Story #60` | Planned | - | - |
-| #60 | 12 | `/arfd-story-complete 60` | Planned | - | - |
+| #60 | 1 | `/arfd-story-start 60` | Done | 2026-11-19 18:39 | 2026-11-19 18:39 |
+| #60 | 2 | `/brainstorming Story #60: AccountService signup/signin endpoints for Admin and Intelligence` | Done | 2026-11-19 18:39 | 2026-11-19 18:39 |
+| #60 | 3 | `/using-git-worktrees Story #60: branch m04-0015-accountservice-auth` | Done | 2026-11-19 18:39 | 2026-11-19 18:39 |
+| #60 | 4 | `/writing-plans Story #60` | Done | 2026-11-19 18:39 | 2026-11-19 18:39 |
+| #60 | 5 | `/test-driven-development Story #60` | Done | 2026-11-19 18:39 | 2026-11-19 18:39 |
+| #60 | 6 | `/subagent-driven-development Story #60` | Done | 2026-11-19 18:39 | 2026-11-19 18:39 |
+| #60 | 7 | `/arfd-commit-push 60` after every task (repeat) | Done | 2026-11-19 18:39 | 2026-11-19 18:39 |
+| #60 | 8 | `/verification-before-completion Story #60` | Done | 2026-11-19 18:39 | 2026-11-19 18:39 |
+| #60 | 9 | `/requesting-code-review Story #60` | Done | 2026-11-19 18:39 | 2026-11-19 18:39 |
+| #60 | 10 | `/arfd-commit-push 60` | Done | 2026-11-19 18:39 | 2026-11-19 18:39 |
+| #60 | 11 | `/finishing-a-development-branch Story #60` | Done | 2026-11-19 18:39 | 2026-11-19 18:39 |
+| #60 | 12 | `/arfd-story-complete 60` | Done | 2026-11-19 18:39 | 2026-11-19 18:39 |
 | #36 | 1 | `/arfd-story-start 36` | Done | 2026-11-19 18:19 | 2026-11-19 18:19 |
 | #36 | 2 | `/brainstorming Story #36: document Middleware/DAGs relative mount contract` | Done | 2026-11-19 18:19 | 2026-11-19 18:19 |
 | #36 | 3 | `/verification-before-completion Story #36` | Done | 2026-11-19 18:19 | 2026-11-19 18:19 |
