@@ -1,0 +1,41 @@
+# S3-compatible object storage for the analytics lake (story #20).
+# Bucket convention: arfd-lake / market_db/market_rule/ (Iceberg table prefix).
+services:
+  minio:
+    image: minio/minio:RELEASE.2024-09-22T00-33-43Z
+    container_name: arfd-minio
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${ARFD_MINIO_ROOT_USER:-arfdminio}
+      MINIO_ROOT_PASSWORD: ${ARFD_MINIO_ROOT_PASSWORD:-arfdminio}
+    volumes:
+      - arfd_minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  minio-init:
+    image: minio/mc:RELEASE.2024-09-22T00-33-43Z
+    container_name: arfd-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 $${MINIO_ROOT_USER} $${MINIO_ROOT_PASSWORD};
+      mc mb --ignore-existing local/$${ARFD_MINIO_BUCKET:-arfd-lake};
+      mc anonymous set download local/$${ARFD_MINIO_BUCKET:-arfd-lake}/market_db || true;
+      exit 0;
+      "
+    environment:
+      MINIO_ROOT_USER: ${ARFD_MINIO_ROOT_USER:-arfdminio}
+      MINIO_ROOT_PASSWORD: ${ARFD_MINIO_ROOT_PASSWORD:-arfdminio}
+      ARFD_MINIO_BUCKET: ${ARFD_MINIO_BUCKET:-arfd-lake}
+
+volumes:
+  arfd_minio_data:

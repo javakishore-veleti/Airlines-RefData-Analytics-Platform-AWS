@@ -1,0 +1,102 @@
+# Apache Airflow with Middleware/DAGs mounted (story #19).
+# Started only when no healthy Airflow is already reachable (D1).
+# Postgres + Redis here are Airflow dependencies; docker-all-up skips them
+# individually when already healthy on the machine (D1).
+x-airflow-common: &airflow-common
+  image: apache/airflow:2.9.3
+  environment: &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${ARFD_POSTGRES_USER:-arfd}:${ARFD_POSTGRES_PASSWORD:-arfd}@${ARFD_AIRFLOW_POSTGRES_HOST:-postgres}:${ARFD_AIRFLOW_POSTGRES_PORT:-5432}/${ARFD_POSTGRES_DB:-arfd}
+    AIRFLOW__CORE__FERNET_KEY: ''
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
+    AIRFLOW__WEBSERVER__EXPOSE_CONFIG: 'true'
+    _AIRFLOW_WWW_USER_USERNAME: arfd
+    _AIRFLOW_WWW_USER_PASSWORD: arfd
+  volumes:
+    - ../../../Middleware/DAGs:/opt/airflow/dags
+  user: "${AIRFLOW_UID:-50000}:0"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: arfd-postgres
+    profiles: ["arfd-postgres"]
+    environment:
+      POSTGRES_USER: ${ARFD_POSTGRES_USER:-arfd}
+      POSTGRES_PASSWORD: ${ARFD_POSTGRES_PASSWORD:-arfd}
+      POSTGRES_DB: ${ARFD_POSTGRES_DB:-arfd}
+    ports:
+      - "${ARFD_POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - arfd_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${ARFD_POSTGRES_USER:-arfd}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7
+    container_name: arfd-redis
+    profiles: ["arfd-redis"]
+    ports:
+      - "${ARFD_REDIS_PORT:-6379}:6379"
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  airflow-init:
+    <<: *airflow-common
+    container_name: arfd-airflow-init
+    profiles: ["arfd-airflow"]
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        airflow db migrate
+        airflow users create \
+          --username arfd \
+          --password arfd \
+          --firstname ARFD \
+          --lastname Admin \
+          --role Admin \
+          --email arfd@example.local || true
+    environment:
+      <<: *airflow-common-env
+      ARFD_AIRFLOW_POSTGRES_HOST: ${ARFD_AIRFLOW_POSTGRES_HOST:-postgres}
+      ARFD_AIRFLOW_POSTGRES_PORT: ${ARFD_AIRFLOW_POSTGRES_PORT:-5432}
+
+  airflow-webserver:
+    <<: *airflow-common
+    container_name: arfd-airflow-webserver
+    profiles: ["arfd-airflow"]
+    command: webserver
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+    environment:
+      <<: *airflow-common-env
+      ARFD_AIRFLOW_POSTGRES_HOST: ${ARFD_AIRFLOW_POSTGRES_HOST:-postgres}
+      ARFD_AIRFLOW_POSTGRES_PORT: ${ARFD_AIRFLOW_POSTGRES_PORT:-5432}
+
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: arfd-airflow-scheduler
+    profiles: ["arfd-airflow"]
+    command: scheduler
+    environment:
+      <<: *airflow-common-env
+      ARFD_AIRFLOW_POSTGRES_HOST: ${ARFD_AIRFLOW_POSTGRES_HOST:-postgres}
+      ARFD_AIRFLOW_POSTGRES_PORT: ${ARFD_AIRFLOW_POSTGRES_PORT:-5432}
+
+volumes:
+  arfd_postgres_data:

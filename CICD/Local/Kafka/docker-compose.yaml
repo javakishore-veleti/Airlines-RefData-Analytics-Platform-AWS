@@ -1,2 +1,36 @@
-# Placeholder compose — streaming + CDC connector services filled in M02.
-services: {}
+# Kafka + Debezium Connect for ARFD CDC path (story #17).
+services:
+  zookeeper:
+    image: quay.io/debezium/zookeeper:2.5
+    container_name: arfd-zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: quay.io/debezium/kafka:2.5
+    container_name: arfd-kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+
+  connect:
+    image: quay.io/debezium/connect:2.5
+    container_name: arfd-debezium-connect
+    depends_on:
+      - kafka
+    ports:
+      - "8083:8083"
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      GROUP_ID: arfd-connect
+      CONFIG_STORAGE_TOPIC: arfd_connect_configs
+      OFFSET_STORAGE_TOPIC: arfd_connect_offsets
+      STATUS_STORAGE_TOPIC: arfd_connect_statuses
+      KEY_CONVERTER_SCHEMAS_ENABLE: "false"
+      VALUE_CONVERTER_SCHEMAS_ENABLE: "false"

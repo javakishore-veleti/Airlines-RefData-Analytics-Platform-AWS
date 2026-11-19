@@ -27,4 +27,17 @@ Decisions are numbered `D##`. Record new ones here when brainstorming closes the
 
 **Applies to:** Milestone M02 stories for lifecycle scripts and platform compose (especially orchestration, operational database, and any Postgres/Redis dependencies introduced for Airflow or Middleware).
 
-**Next decision number:** D2
+## D2 — Historical seed and Admin CDC simulation
+
+**Status:** Decided (2026-11-19)
+
+**Context:** The Architecture Blog walkthrough validates CDC with a small `market_rule` table. ARFD needs volume for realistic full-load and continuous CDC testing, plus an operator control to inject change events without hand-writing SQL.
+
+**Decision:**
+
+1. `scripts/seed_market_rules.py` loads **1,000,000** synthetic `market_rule` rows by default (`--count` override).
+2. `Middleware/API-Services` exposes `POST /admin/cdc/generate` with `{ "count": N }` to apply mixed INSERT/UPDATE/DELETE against `market_rule`.
+3. `Portals/Airlines-RD-Admin/index.html` provides a **Generate CDC events** control that calls that API.
+
+**Next decision number:** D3
+

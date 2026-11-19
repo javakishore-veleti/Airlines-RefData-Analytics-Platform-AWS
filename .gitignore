@@ -225,3 +225,6 @@ runtime_data/
 
 .worktrees/
 runtime_data/
+
+CICD/Local/.env
+CICD/Local/.arfd-state/

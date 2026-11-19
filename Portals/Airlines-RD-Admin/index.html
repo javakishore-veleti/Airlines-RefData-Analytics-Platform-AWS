@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Airlines RD Admin</title>
+  <style>
+    :root { --ink:#0b1f33; --line:#c9d4e0; --accent:#0b6e4f; --bg:#f4f7fb; }
+    body { margin:0; font-family: "IBM Plex Sans", "Segoe UI", sans-serif; background:var(--bg); color:var(--ink); }
+    header { padding:2rem 2.5rem; border-bottom:1px solid var(--line); background:#fff; }
+    h1 { margin:0; font-size:1.6rem; letter-spacing:.02em; }
+    p { margin:.4rem 0 0; max-width:42rem; color:#40566c; }
+    main { padding:2rem 2.5rem; display:grid; gap:1.5rem; max-width:40rem; }
+    section { background:#fff; border:1px solid var(--line); padding:1.25rem 1.5rem; }
+    label { display:block; font-size:.85rem; margin-bottom:.35rem; }
+    input { width:8rem; padding:.45rem .6rem; border:1px solid var(--line); font:inherit; }
+    button, a.button {
+      display:inline-block; margin-top:.75rem; padding:.55rem 1rem; border:0; background:var(--accent);
+      color:#fff; text-decoration:none; font:inherit; cursor:pointer;
+    }
+    pre { background:#0b1f33; color:#e8eef5; padding:1rem; overflow:auto; font-size:.85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Airlines RD Admin</h1>
+    <p>Manage reference data and simulate change-data-capture volume against <code>market_rule</code>.</p>
+  </header>
+  <main>
+    <section>
+      <h2>Reference data</h2>
+      <p>Rows in <code>market_db.market_rule</code>: <strong id="count">…</strong></p>
+      <button type="button" id="refresh">Refresh count</button>
+    </section>
+    <section>
+      <h2>Simulate CDC</h2>
+      <p>Generate inserts, updates, and deletes so the CDC pipeline can stream changes.</p>
+      <label for="n">Number of events</label>
+      <input id="n" type="number" min="1" max="100000" value="100" />
+      <p><a class="button" href="#generate" id="generate">Generate CDC events</a></p>
+      <pre id="out">Ready.</pre>
+    </section>
+  </main>
+  <script>
+    const API = localStorage.getItem('ARFD_API') || 'http://127.0.0.1:8100';
+    async function refreshCount() {
+      try {
+        const r = await fetch(API + '/admin/market-rules/count');
+        const j = await r.json();
+        document.getElementById('count').textContent = j.count.toLocaleString();
+      } catch (e) {
+        document.getElementById('count').textContent = 'API offline';
+      }
+    }
+    document.getElementById('refresh').onclick = refreshCount;
+    document.getElementById('generate').onclick = async (ev) => {
+      ev.preventDefault();
+      const count = Number(document.getElementById('n').value || 10);
+      document.getElementById('out').textContent = 'Generating ' + count + ' events…';
+      try {
+        const r = await fetch(API + '/admin/cdc/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ count, mix: 'mixed' })
+        });
+        const j = await r.json();
+        document.getElementById('out').textContent = JSON.stringify(j, null, 2);
+        refreshCount();
+      } catch (e) {
+        document.getElementById('out').textContent = String(e);
+      }
+    };
+    refreshCount();
+  </script>
+</body>
+</html>

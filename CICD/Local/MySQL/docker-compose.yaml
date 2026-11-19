@@ -1,0 +1,32 @@
+# Operational MySQL with ROW binlog for Debezium CDC (story #16).
+# Started only when no healthy MySQL is already reachable (D1).
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: arfd-mysql
+    ports:
+      - "${ARFD_MYSQL_PORT:-3306}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ARFD_MYSQL_ROOT_PASSWORD:-arfdroot}
+      MYSQL_DATABASE: ${ARFD_MYSQL_DATABASE:-market_db}
+      MYSQL_USER: ${ARFD_MYSQL_USER:-arfd}
+      MYSQL_PASSWORD: ${ARFD_MYSQL_PASSWORD:-arfd}
+    command:
+      - --server-id=1
+      - --log-bin=mysql-bin
+      - --binlog-format=ROW
+      - --binlog-row-image=FULL
+      - --binlog-checksum=NONE
+      - --gtid-mode=ON
+      - --enforce-gtid-consistency=ON
+    volumes:
+      - arfd_mysql_data:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${ARFD_MYSQL_ROOT_PASSWORD:-arfdroot}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  arfd_mysql_data:
