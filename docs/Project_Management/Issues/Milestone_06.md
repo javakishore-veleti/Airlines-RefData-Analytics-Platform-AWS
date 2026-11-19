@@ -1,8 +1,8 @@
-# Milestone M06 - Airlines-RD-Intelligence
+# Milestone M06 - Airlines-RD-Intelligence (UI)
 
-**Scope:** Intelligence portal for analysts, risk managers, and data managers to view and query lake-backed reference data.
+**Scope:** Angular Intelligence portal sharing D5 professional UI with Admin; role-oriented nav; AccountService auth; browse/query; wiring to MasterData-API + AccountService-API.
 
-**Status:** open. Epic #44; 1 features; 4 stories. 0 done; 4 left to build.
+**Status:** open. Epic #44; 1 feature; 4 stories. 0 done; 4 left to build.
 
 How to read this file:
 - `#N` is the GitHub issue number. The `M0N-00NN` key is the sequence tag at the start of the issue title.
@@ -23,10 +23,10 @@ How to read this file:
 |---|---|---|---|---|---|
 | 1 | #44 | M06-0001 | Epic | Airlines-RD-Intelligence | Parent of the features below |
 | 2 | #45 | M06-0002 | Feature | Intelligence portal application | Parent of the stories below |
-| 3 | #46 | M06-0003 | Story | App shell and role-oriented navigation | Portal foundation |
+| 3 | #46 | M06-0003 | Story | Angular Intelligence shell (PrimeNG Aura, nav, signup/signin) | Portal foundation (D5) |
 | 4 | #47 | M06-0004 | Story | Browse and filter reference data | Primary read path |
 | 5 | #48 | M06-0005 | Story | Query and saved views | Analyst workflows |
-| 6 | #49 | M06-0006 | Story | Wire Intelligence portal to Middleware/API-Services | End-to-end intelligence path |
+| 6 | #49 | M06-0006 | Story | Wire Intelligence portal to MasterData-API and AccountService-API | End-to-end path |
 
 ## 2. The same issues grouped by epic and feature
 
@@ -34,21 +34,23 @@ How to read this file:
 Epic #44  M06-0001  Airlines-RD-Intelligence
 |
 +-- Feature #45  M06-0002  Intelligence portal application
-\     +-- #46  App shell and role-oriented navigation
+\     +-- #46  Angular Intelligence shell (PrimeNG Aura, nav, signup/signin)
 \     +-- #47  Browse and filter reference data
 \     +-- #48  Query and saved views
-\     +-- #49  Wire Intelligence portal to Middleware/API-Services
+\     +-- #49  Wire Intelligence portal to MasterData-API and AccountService-API
 ```
 
 ## 3. Superpowers workflow
 
-One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-worktrees`, `/writing-plans`, `/test-driven-development`, `/subagent-driven-development`, `/verification-before-completion`, `/requesting-code-review`, and `/finishing-a-development-branch` are Superpowers natives.
+One chat per story. `/arfd-*` are board wrappers; Superpowers natives own design/plan/TDD/implementation.
+
+**No vibe coding.** Product/UI code only after `/arfd-story-start N` and only via the steps below. Depends on M05 D5 (#62) and M04 AccountService (#58–#60).
 
 | Issue | Step | Command | Status | Started | Completed |
 |---|---|---|---|---|---|
-| #46 | 1 | `/arfd-story-start 46` | In progress | - | - |
-| #46 | 2 | `/brainstorming Story #46: scaffold Airlines-RD-Intelligence shell and role-oriented nav` | Planned | - | - |
-| #46 | 3 | `/using-git-worktrees Story #46: branch m06-0003-intel-app-shell` | Planned | - | - |
+| #46 | 1 | `/arfd-story-start 46` | Planned | - | - |
+| #46 | 2 | `/brainstorming Story #46: Angular Intelligence shell with D5 theme, top bar, left nav, signup/signin` | Planned | - | - |
+| #46 | 3 | `/using-git-worktrees Story #46: branch m06-0003-intel-angular-shell` | Planned | - | - |
 | #46 | 4 | `/writing-plans Story #46` | Planned | - | - |
 | #46 | 5 | `/test-driven-development Story #46` | Planned | - | - |
 | #46 | 6 | `/subagent-driven-development Story #46` | Planned | - | - |
@@ -59,7 +61,7 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #46 | 11 | `/finishing-a-development-branch Story #46` | Planned | - | - |
 | #46 | 12 | `/arfd-story-complete 46` | Planned | - | - |
 | #47 | 1 | `/arfd-story-start 47` | Planned | - | - |
-| #47 | 2 | `/brainstorming Story #47: build browse/filter experience for RD Intelligence` | Planned | - | - |
+| #47 | 2 | `/brainstorming Story #47: browse/filter reference data for Intelligence` | Planned | - | - |
 | #47 | 3 | `/using-git-worktrees Story #47: branch m06-0004-browse-filter-refdata` | Planned | - | - |
 | #47 | 4 | `/writing-plans Story #47` | Planned | - | - |
 | #47 | 5 | `/test-driven-development Story #47` | Planned | - | - |
@@ -71,7 +73,7 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #47 | 11 | `/finishing-a-development-branch Story #47` | Planned | - | - |
 | #47 | 12 | `/arfd-story-complete 47` | Planned | - | - |
 | #48 | 1 | `/arfd-story-start 48` | Planned | - | - |
-| #48 | 2 | `/brainstorming Story #48: define and implement query/saved views for RD Intelligence` | Planned | - | - |
+| #48 | 2 | `/brainstorming Story #48: query and saved views for Intelligence` | Planned | - | - |
 | #48 | 3 | `/using-git-worktrees Story #48: branch m06-0005-query-saved-views` | Planned | - | - |
 | #48 | 4 | `/writing-plans Story #48` | Planned | - | - |
 | #48 | 5 | `/test-driven-development Story #48` | Planned | - | - |
@@ -83,7 +85,7 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #48 | 11 | `/finishing-a-development-branch Story #48` | Planned | - | - |
 | #48 | 12 | `/arfd-story-complete 48` | Planned | - | - |
 | #49 | 1 | `/arfd-story-start 49` | Planned | - | - |
-| #49 | 2 | `/brainstorming Story #49: wire Airlines-RD-Intelligence to Middleware/API-Services` | Planned | - | - |
+| #49 | 2 | `/brainstorming Story #49: wire Intelligence to MasterData-API and AccountService-API` | Planned | - | - |
 | #49 | 3 | `/using-git-worktrees Story #49: branch m06-0006-intel-api-wire` | Planned | - | - |
 | #49 | 4 | `/writing-plans Story #49` | Planned | - | - |
 | #49 | 5 | `/test-driven-development Story #49` | Planned | - | - |
@@ -103,5 +105,7 @@ See `Milestone_01.md` section 4 for the full `/arfd-*` command table. Same skill
 
 ## 5. Notes
 
-- Hard gate: open `[Story]` + GitHub Milestone + `/arfd-story-start N` before product code.
-- Run milestones in order; do not start the next milestone until this one is complete (or explicitly parallelized by the team).
+- **Prerequisite:** M05 D5 (#62) and M04 AccountService (#58–#60); M03/M04 lake APIs as needed for browse/query.
+- **Hard gate:** open `[Story]` + GitHub Milestone + `/arfd-story-start N` before product/UI code.
+- **No vibe coding:** Section 3 Superpowers natives only; `/arfd-*` for board/git/milestone logging.
+- **D5:** same professional light theme as Admin — see DESIGN.md D5.

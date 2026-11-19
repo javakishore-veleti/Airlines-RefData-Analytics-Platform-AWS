@@ -53,5 +53,42 @@ Decisions are numbered `D##`. Record new ones here when brainstorming closes the
 
 **Decision:** Register a Debezium MySQL connector on the local Connect cluster for `market_db.market_rule` only. Config: `CICD/Local/Kafka/connectors/market-rule-mysql.json`. Topic prefix `arfd`. Connect reaches MySQL via `host.docker.internal` + `ARFD_MYSQL_*`. Spec: `docs/Superpowers/specs/2026-11-19-m03-0003-cdc-market-rule-design.md`.
 
-**Next decision number:** D5
+## D5 — Portal UI system (Angular, professional light theme)
+
+**Status:** Decided (2026-11-19) — stories #62 / #40 / #46
+
+**Context:** Admin and Intelligence portals must look like professional airline/enterprise SaaS — not academic gray slabs, not pure black, not generic purple AI themes. Research favors PrimeNG light presets + tinted neutrals + modern SVG icons over stock Bootstrap gray.
+
+**Decision:**
+
+| Layer | Choice |
+|---|---|
+| Framework | Angular (both `Portals/Airlines-RD-Admin` and `Portals/Airlines-RD-Intelligence`) |
+| Primary components | **PrimeNG** with **Aura** or **Lara** light theme (tables, overlays, forms, menus) |
+| Layout grid | Bootstrap 5 **Sass only** for grid/spacing; remap `$gray-*` / `$body-*` to ARFD tokens — do **not** ship default Bootstrap chrome |
+| Icons | **Lucide** (`lucide-angular`); Phosphor Duotone optional for brand marks |
+| Typography | **Plus Jakarta Sans** (geometric sans), body line-height ≥ 1.5 |
+| Layout pattern | Top main menu bar + collapsible left nav + bright workspace; favicon + brand mark required |
+| Auth UI | Signup / signin against **AccountService-API** (#57–#60) |
+| Admin-only | **User Management** menu → AccountService user CRUD (#61) |
+
+**Color tokens (no pure black / sterile gray):**
+
+| Role | Token | Hex |
+|---|---|---|
+| Text / nav | Deep navy | `#0F172A` |
+| Secondary text | Muted indigo | `#475569` |
+| Canvas | Ice blue | `#F4F8FB` |
+| Surfaces | White | `#FFFFFF` |
+| Borders | Powder blue | `#DBEAFE` |
+| Accent / CTA | Sky | `#0284C7` |
+| Accent hover | Sky deep | `#0369A1` |
+
+**60/30/10:** ~60% white + ice canvas, ~30% navy nav/headers, ~10% sky CTAs/active states.
+
+**Forbidden defaults:** `#000000` body text, `#808080` / flat gray page chrome, dark-mode-first shells, purple-indigo gradient clichés.
+
+**Applies to:** M05 #40/#61/#62, M06 #46; shared tokens live under each portal’s `styles/` (extract shared theme package later if duplication hurts).
+
+**Next decision number:** D6
 
