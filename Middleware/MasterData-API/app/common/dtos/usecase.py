@@ -83,3 +83,22 @@ class LakeQueryResp:
 class LakeQueryCtx:
     req: LakeQueryReq = field(default_factory=LakeQueryReq)
     resp: LakeQueryResp = field(default_factory=LakeQueryResp)
+
+
+@dataclass
+class MessagingReq:
+    payload: str = ""
+    max_messages: int = 10
+
+
+@dataclass
+class MessagingResp:
+    ok: bool = False
+    messages: list = field(default_factory=list)
+    detail: str = ""
+
+
+@dataclass
+class MessagingCtx:
+    req: MessagingReq = field(default_factory=MessagingReq)
+    resp: MessagingResp = field(default_factory=MessagingResp)

@@ -1,0 +1,6 @@
+from __future__ import annotations
+from typing import Protocol
+from app.common.dtos.usecase import MessagingCtx
+class WFMessaging(Protocol):
+    def publish(self, ctx: MessagingCtx) -> MessagingCtx: ...
+    def consume(self, ctx: MessagingCtx) -> MessagingCtx: ...
