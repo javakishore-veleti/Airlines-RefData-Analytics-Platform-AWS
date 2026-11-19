@@ -86,8 +86,8 @@ If a test fails and you do not know why, run `/systematic-debugging Story #N` be
 | #3 | 1 | `/arfd-story-start 3` | Done | 2026-11-19 16:23 | 2026-11-19 16:24 |
 | #3 | 2 | `/brainstorming Story #3: confirm Superpowers plugin enablement and vendored skills layout for ARFD` | Done | 2026-11-19 16:24 | 2026-11-19 16:24 |
 | #3 | 3 | `/verification-before-completion Story #3` | Done | 2026-11-19 16:24 | 2026-11-19 16:24 |
-| #3 | 4 | `/arfd-commit-push 3` | In progress | 2026-11-19 16:24 | - |
-| #3 | 5 | `/arfd-story-complete 3` | Planned | - | - |
+| #3 | 4 | `/arfd-commit-push 3` | Done | 2026-11-19 16:24 | 2026-11-19 16:24 |
+| #3 | 5 | `/arfd-story-complete 3` | In progress | 2026-11-19 16:24 | - |
 | #4 | 1 | `/arfd-story-start 4` | Planned | - | - |
 | #4 | 2 | `/brainstorming Story #4: align AGENTS.md and Cursor rules for ARFD hard gate and one-milestone workflow` | Planned | - | - |
 | #4 | 3 | `/verification-before-completion Story #4` | Planned | - | - |
