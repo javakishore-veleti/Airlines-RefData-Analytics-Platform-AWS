@@ -2,7 +2,7 @@
 
 **Scope:** ARFD methodology (Superpowers + `/arfd-*` wrappers), product docs alignment, and repository skeleton for CICD, Middleware, and Portals. No AWS stack creates in this milestone.
 
-**Status:** open. Epic #1; features #2, #6; 6 stories. 3 done; 3 left to build.
+**Status: complete.** Epic #1 and features #2, #6 closed. 6 stories done; 0 left to build.
 
 How to read this file:
 - `#1` is the GitHub issue number. The `M01-00NN` key is the sequence tag at the start of the issue title. Keys are not in build order.
@@ -134,9 +134,9 @@ If a test fails and you do not know why, run `/systematic-debugging Story #N` be
 | #9 | 10 | `/arfd-commit-push 9` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
 | #9 | 11 | `/finishing-a-development-branch Story #9` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
 | #9 | 12 | `/arfd-story-complete 9` | Done | 2026-11-19 16:29 | 2026-11-19 16:29 |
-| Feature #2 | 1 | `/arfd-feature-complete 2` | Planned | - | - |
-| Feature #6 | 1 | `/arfd-feature-complete 6` | Planned | - | - |
-| Epic #1 | 1 | `/arfd-epic-complete 1` | Planned | - | - |
+| Feature #2 | 1 | `/arfd-feature-complete 2` | Done | - | - |
+| Feature #6 | 1 | `/arfd-feature-complete 6` | Done | - | - |
+| Epic #1 | 1 | `/arfd-epic-complete 1` | Done | - | - |
 
 ## 4. Project skills (`arfd-` = Airlines Reference Data)
 
