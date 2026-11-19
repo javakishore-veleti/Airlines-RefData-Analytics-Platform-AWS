@@ -10,6 +10,7 @@ from app.wf.WFHealth.tasks.check_mysql_task import CheckMysqlTask
 from app.wf.WFGenerateCdcEvents.impl import WFGenerateCdcEventsImpl
 from app.wf.WFGenerateCdcEvents.tasks.generate_mix_task import GenerateMixTask
 from app.wf.WFMarketRuleWrite.impl import WFMarketRuleWriteImpl
+from app.wf.WFLakeQuery.impl import WFLakeQueryImpl
 
 _BEANS: dict[str, Any] = {}
 
@@ -22,6 +23,9 @@ def get_bean(bean_id: str) -> Any:
         elif bean_id == "wf_generate_cdc":
             dao = dao_factory.get_bean("market_rule_dao")
             _BEANS[bean_id] = WFGenerateCdcEventsImpl(generate_mix_task=GenerateMixTask(dao=dao))
+        elif bean_id == "wf_lake_query":
+            dao = dao_factory.get_bean("lake_dao")
+            _BEANS[bean_id] = WFLakeQueryImpl(dao=dao)
         elif bean_id == "wf_market_rule_write":
             dao = dao_factory.get_bean("market_rule_dao")
             _BEANS[bean_id] = WFMarketRuleWriteImpl(dao=dao)

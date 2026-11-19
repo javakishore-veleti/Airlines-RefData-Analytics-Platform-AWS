@@ -65,3 +65,21 @@ class MarketRuleWriteResp:
 class MarketRuleWriteCtx:
     req: MarketRuleWriteReq = field(default_factory=MarketRuleWriteReq)
     resp: MarketRuleWriteResp = field(default_factory=MarketRuleWriteResp)
+
+
+@dataclass
+class LakeQueryReq:
+    rule_id: int | None = None
+    limit: int = 50
+
+
+@dataclass
+class LakeQueryResp:
+    items: list = field(default_factory=list)
+    count: int = 0
+
+
+@dataclass
+class LakeQueryCtx:
+    req: LakeQueryReq = field(default_factory=LakeQueryReq)
+    resp: LakeQueryResp = field(default_factory=LakeQueryResp)

@@ -6,10 +6,12 @@ from typing import Any
 
 from app.dao.health_dao import MysqlHealthDao
 from app.dao.market_rule_dao import MysqlMarketRuleDao
+from app.dao.lake_dao import JsonLakeDao
 
 _BEANS: dict[str, Any] = {
     "health_dao": MysqlHealthDao(),
     "market_rule_dao": MysqlMarketRuleDao(),
+    "lake_dao": JsonLakeDao(),
 }
 
 

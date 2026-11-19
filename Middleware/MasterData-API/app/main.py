@@ -5,9 +5,9 @@ from __future__ import annotations
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import admin_cdc, health, market_rules
+from app.api import admin_cdc, health, lake_query, market_rules
 
-app = FastAPI(title="ARFD MasterData-API", version="0.4.0")
+app = FastAPI(title="ARFD MasterData-API", version="0.5.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -17,6 +17,7 @@ app.add_middleware(
 app.include_router(health.router)
 app.include_router(admin_cdc.router)
 app.include_router(market_rules.router)
+app.include_router(lake_query.router)
 
 
 def create_app() -> FastAPI:
