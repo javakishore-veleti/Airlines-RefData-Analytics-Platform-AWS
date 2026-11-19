@@ -150,6 +150,11 @@ rabbitmq-data/
 !CICD/Local/lib/
 !CICD/Local/lib/**
 
+# Keep ARFD DAG shared libraries (Python packaging lib/ ignore would hide them)
+!Middleware/DAGs/lib/
+!Middleware/DAGs/lib/**
+
+
 # ActiveMQ
 activemq-data/
 
