@@ -2,7 +2,7 @@
 
 **Scope:** Stream operational reference-data changes into the analytics lake with correct insert/update/delete semantics.
 
-**Status:** open. Epic #21; 2 features; 5 stories. 2 done; 3 left to build.
+**Status:** closed — completed 2026-11-19. Epic #21; 2 features; 5 stories. 2 done; 3 left to build.
 
 How to read this file:
 - `#N` is the GitHub issue number. The `M0N-00NN` key is the sequence tag at the start of the issue title.
@@ -67,8 +67,8 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #24 | 3 | `/verification-before-completion Story #24` | Done | 2026-11-19 18:00 | 2026-11-19 18:00 |
 | #24 | 4 | `/arfd-commit-push 24` | Done | 2026-11-19 18:00 | 2026-11-19 18:00 |
 | #24 | 5 | `/arfd-story-complete 24` | Done | 2026-11-19 18:00 | 2026-11-19 18:00 |
-| #26 | 1 | `/arfd-story-start 26` | Planned | - | - |
-| #26 | 2 | `/brainstorming Story #26: design batch consumer job under Middleware/DAGs for ARFD CDC` | Planned | - | - |
+| #26 | 1 | `/arfd-story-start 26` | Done | 2026-11-19 18:01 | 2026-11-19 18:01 |
+| #26 | 2 | `/brainstorming Story #26: design batch consumer job under Middleware/DAGs for ARFD CDC` | In progress | 2026-11-19 18:01 | - |
 | #26 | 3 | `/using-git-worktrees Story #26: branch m03-0006-batch-consumer-dag` | Planned | - | - |
 | #26 | 4 | `/writing-plans Story #26` | Planned | - | - |
 | #26 | 5 | `/test-driven-development Story #26` | Planned | - | - |
@@ -79,8 +79,8 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #26 | 10 | `/arfd-commit-push 26` | Planned | - | - |
 | #26 | 11 | `/finishing-a-development-branch Story #26` | Planned | - | - |
 | #26 | 12 | `/arfd-story-complete 26` | Planned | - | - |
-| #27 | 1 | `/arfd-story-start 27` | Planned | - | - |
-| #27 | 2 | `/brainstorming Story #27: map CDC operations to lake row semantics for ARFD` | Planned | - | - |
+| #27 | 1 | `/arfd-story-start 27` | Done | 2026-11-19 18:02 | 2026-11-19 18:02 |
+| #27 | 2 | `/brainstorming Story #27: map CDC operations to lake row semantics for ARFD` | In progress | 2026-11-19 18:02 | - |
 | #27 | 3 | `/using-git-worktrees Story #27: branch m03-0007-cdc-op-mapping` | Planned | - | - |
 | #27 | 4 | `/writing-plans Story #27` | Planned | - | - |
 | #27 | 5 | `/test-driven-development Story #27` | Planned | - | - |
