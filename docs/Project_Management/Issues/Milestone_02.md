@@ -2,7 +2,7 @@
 
 **Scope:** Lifecycle scripts and containerized platform services (database, streaming, messaging, orchestration, object storage) for development and CI environments.
 
-**Status:** open. Epic #10; 2 features; 8 stories. 0 done; 8 left to build.
+**Status: complete.** Runtime bootstrap delivered (D1 reuse, compose, 1M seed tooling, CDC generator).
 
 How to read this file:
 - `#N` is the GitHub issue number. The `M0N-00NN` key is the sequence tag at the start of the issue title.
