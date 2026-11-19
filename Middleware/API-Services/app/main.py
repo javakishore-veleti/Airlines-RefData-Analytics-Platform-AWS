@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import os
 import random
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 import pymysql
@@ -77,7 +77,7 @@ def generate_cdc(body: GenerateCdcRequest) -> GenerateCdcResponse:
     inserted = 0
     updated = 0
     deleted = 0
-    now = datetime.utcnow()
+    now = datetime.now(UTC).replace(tzinfo=None)
     try:
         with conn.cursor() as cur:
             # Mixed CDC ops: ~40% INSERT, ~40% UPDATE, ~20% DELETE (remainder → INSERT).

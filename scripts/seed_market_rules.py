@@ -16,7 +16,7 @@ import os
 import random
 import sys
 import time
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 try:
     import pymysql
@@ -81,7 +81,7 @@ def seed(count: int, batch_size: int, truncate: bool) -> None:
                 "(name, weight, status, effective_from, market_from, market_to, created_at, updated_at) "
                 "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
             )
-            now = datetime.utcnow()
+            now = datetime.now(UTC).replace(tzinfo=None)
             t0 = time.time()
             inserted = 0
             while inserted < count:
