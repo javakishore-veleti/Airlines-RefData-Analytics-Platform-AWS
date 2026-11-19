@@ -42,3 +42,26 @@ class UserResp:
 class UserCtx:
     req: UserReq = field(default_factory=UserReq)
     resp: UserResp = field(default_factory=UserResp)
+
+
+@dataclass
+class AuthReq:
+    username: str = ""
+    password: str = ""
+    token: str = ""
+    display_name: str = ""
+
+
+@dataclass
+class AuthResp:
+    ok: bool = False
+    token: str = ""
+    username: str = ""
+    role: str = ""
+    message: str = ""
+
+
+@dataclass
+class AuthCtx:
+    req: AuthReq = field(default_factory=AuthReq)
+    resp: AuthResp = field(default_factory=AuthResp)
