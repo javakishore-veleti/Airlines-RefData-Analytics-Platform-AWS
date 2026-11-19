@@ -41,5 +41,17 @@ Decisions are numbered `D##`. Record new ones here when brainstorming closes the
 
 **Out of scope for D2:** Debezium connector registration and Iceberg apply (Milestone M03).
 
-**Next decision number:** D3
+## D3 — MasterData-API modular monolith and layering (boarded)
+
+**Status:** Boarded (2026-11-19) — implement under M04 stories #56 / #31 / #55 / #32. Full write-up lands with story #56.
+
+**Summary (locked):** `Middleware/MasterData-API/` is the FastAPI project root (modular monolith). Layers `api → facade → WF → tasks → dao`; facades use `interface.py`/`impl.py`; each WF folder uses **WF** naming with `interface.py` + `tasks/`; Ctx/Req/Resp DTOs in `common/dtos/usecase.py`; per-layer `object_factory.py` bean lookup; `app-startup.sh` / `app-status.sh` / `app-shutdown.sh` per microservice; root npm `local:containers:*` / `local:middleware:*` scans `Middleware/*/app-*.sh`.
+
+## D4 — Debezium CDC for `market_db.market_rule`
+
+**Status:** Decided (2026-11-19) — story #23
+
+**Decision:** Register a Debezium MySQL connector on the local Connect cluster for `market_db.market_rule` only. Config: `CICD/Local/Kafka/connectors/market-rule-mysql.json`. Topic prefix `arfd`. Connect reaches MySQL via `host.docker.internal` + `ARFD_MYSQL_*`. Spec: `docs/Superpowers/specs/2026-11-19-m03-0003-cdc-market-rule-design.md`.
+
+**Next decision number:** D5
 
