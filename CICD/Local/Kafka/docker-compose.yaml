@@ -17,7 +17,10 @@ services:
       - "9092:9092"
     environment:
       ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      # Connect workers use the docker DNS name; host clients use localhost:9092 via port map.
+      ADVERTISED_HOST_NAME: kafka
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
 
   connect:
     image: quay.io/debezium/connect:2.5

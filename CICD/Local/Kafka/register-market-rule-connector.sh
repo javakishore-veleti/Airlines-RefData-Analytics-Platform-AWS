@@ -64,5 +64,11 @@ else
 fi
 
 echo "Status:"
-curl -sf "${CONNECT_URL}/connectors/${NAME}/status" | python3 -m json.tool
+for _ in $(seq 1 15); do
+  if STATUS_JSON=$(curl -sf "${CONNECT_URL}/connectors/${NAME}/status"); then
+    echo "${STATUS_JSON}" | python3 -m json.tool
+    break
+  fi
+  sleep 1
+done
 echo "Done. Topic prefix: arfd → expect arfd.market_db.market_rule"
