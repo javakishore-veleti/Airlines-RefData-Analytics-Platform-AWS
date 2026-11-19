@@ -15,6 +15,7 @@
     "schema.history.internal.kafka.topic": "arfd.schemahistory.market_rule",
     "include.schema.changes": "false",
     "snapshot.mode": "initial",
-    "tombstones.on.delete": "true"
+    "tombstones.on.delete": "true",
+    "snapshot.locking.mode": "none"
   }
 }
