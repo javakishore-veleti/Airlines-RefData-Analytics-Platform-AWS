@@ -64,14 +64,15 @@ When Airflow is reused, point its DAG folder (or git-sync) at this repo’s `Mid
 pip install pymysql
 python scripts/seed_market_rules.py --count 1000000
 
-# Middleware API (health + CDC generate)
+# Middleware API (health + CDC generate) — default port 8110
 cd Middleware/API-Services
 pip install -r requirements.txt
-uvicorn app.main:app --host 127.0.0.1 --port 8100
+./run.sh
+# or: uvicorn app.main:app --host 127.0.0.1 --port 8110
 
-# Admin UI
+# Admin UI (API base defaults to http://127.0.0.1:8110)
 open Portals/Airlines-RD-Admin/index.html
 # or: python -m http.server 5500 --directory Portals/Airlines-RD-Admin
 ```
 
-`POST /admin/cdc/generate` body: `{"count": 10}` — inserts/updates rows so Debezium can emit change events.
+`POST /admin/cdc/generate` body: `{"count": 10}` — mixed INSERT/UPDATE/DELETE on `market_rule` so Debezium can emit change events.
