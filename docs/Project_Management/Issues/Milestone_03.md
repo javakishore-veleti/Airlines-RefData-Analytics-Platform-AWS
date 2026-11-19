@@ -50,8 +50,8 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 
 | Issue | Step | Command | Status | Started | Completed |
 |---|---|---|---|---|---|
-| #23 | 1 | `/arfd-story-start 23` | In progress | - | - |
-| #23 | 2 | `/brainstorming Story #23: configure CDC for market_db.market_rule without locking stack choices in the issue prose` | Planned | - | - |
+| #23 | 1 | `/arfd-story-start 23` | Done | 2026-11-19 17:22 | 2026-11-19 17:22 |
+| #23 | 2 | `/brainstorming Story #23: configure CDC for market_db.market_rule without locking stack choices in the issue prose` | In progress | 2026-11-19 17:22 | - |
 | #23 | 3 | `/using-git-worktrees Story #23: branch m03-0003-cdc-market-rule` | Planned | - | - |
 | #23 | 4 | `/writing-plans Story #23` | Planned | - | - |
 | #23 | 5 | `/test-driven-development Story #23` | Planned | - | - |
@@ -103,9 +103,9 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #28 | 10 | `/arfd-commit-push 28` | Planned | - | - |
 | #28 | 11 | `/finishing-a-development-branch Story #28` | Planned | - | - |
 | #28 | 12 | `/arfd-story-complete 28` | Planned | - | - |
-| Feature #22 | 1 | `/arfd-feature-complete 22` | Planned | - | - |
+| Feature #22 | 1 | `/arfd-feature-complete 22` | In progress | 2026-11-19 17:22 | - |
 | Feature #25 | 1 | `/arfd-feature-complete 25` | Planned | - | - |
-| Epic #21 | 1 | `/arfd-epic-complete 21` | Planned | - | - |
+| Epic #21 | 1 | `/arfd-epic-complete 21` | In progress | 2026-11-19 17:22 | - |
 
 ## 4. Project skills (`arfd-` = Airlines Reference Data)
 
