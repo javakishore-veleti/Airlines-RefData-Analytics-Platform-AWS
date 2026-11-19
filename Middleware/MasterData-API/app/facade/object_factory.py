@@ -5,6 +5,8 @@ from __future__ import annotations
 from typing import Any
 
 from app.facade.health.impl import HealthFacadeImpl
+from app.facade.generate_cdc.impl import GenerateCdcFacadeImpl
+from app.facade.market_rule.impl import MarketRuleFacadeImpl
 from app.wf import object_factory as wf_factory
 
 _BEANS: dict[str, Any] = {}
@@ -13,8 +15,11 @@ _BEANS: dict[str, Any] = {}
 def get_bean(bean_id: str) -> Any:
     if bean_id not in _BEANS:
         if bean_id == "health_facade":
-            wf = wf_factory.get_bean("wf_health")
-            _BEANS[bean_id] = HealthFacadeImpl(wf=wf)
+            _BEANS[bean_id] = HealthFacadeImpl(wf=wf_factory.get_bean("wf_health"))
+        elif bean_id == "generate_cdc_facade":
+            _BEANS[bean_id] = GenerateCdcFacadeImpl(wf=wf_factory.get_bean("wf_generate_cdc"))
+        elif bean_id == "market_rule_facade":
+            _BEANS[bean_id] = MarketRuleFacadeImpl(wf=wf_factory.get_bean("wf_market_rule_write"))
         else:
             raise KeyError(f"unknown facade bean: {bean_id}")
     return _BEANS[bean_id]

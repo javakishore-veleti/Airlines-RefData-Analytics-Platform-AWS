@@ -11,7 +11,10 @@ FastAPI modular monolith for Airlines reference-data writes and lake reads (D3).
 | Method | Path | Purpose |
 |---|---|---|
 | GET | `/health` | Liveness + MySQL via layered Health use case |
-| POST | `/admin/cdc/generate` | Body `{"count": N}` — CDC writes (WF layering in #32) |
+| POST | `/admin/cdc/generate` | GenerateCdcEvents via full D3 layering |
+| POST | `/admin/market-rules` | Create market rule |
+| PUT | `/admin/market-rules/{id}` | Update market rule |
+| POST | `/admin/market-rules/{id}/deactivate` | Deactivate market rule |
 | GET | `/docs` | OpenAPI |
 
 ```bash
