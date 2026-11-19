@@ -52,10 +52,10 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 |---|---|---|---|---|---|
 | #23 | 1 | `/arfd-story-start 23` | Done | 2026-11-19 17:22 | 2026-11-19 17:22 |
 | #23 | 2 | `/brainstorming Story #23: configure CDC for market_db.market_rule without locking stack choices in the issue prose` | Done | 2026-11-19 17:22 | 2026-11-19 17:23 |
-| #23 | 3 | `/using-git-worktrees Story #23: branch m03-0003-cdc-market-rule` | In progress | 2026-11-19 17:23 | - |
-| #23 | 4 | `/writing-plans Story #23` | Planned | - | - |
-| #23 | 5 | `/test-driven-development Story #23` | Planned | - | - |
-| #23 | 6 | `/subagent-driven-development Story #23` | Planned | - | - |
+| #23 | 3 | `/using-git-worktrees Story #23: branch m03-0003-cdc-market-rule` | Done | 2026-11-19 17:23 | 2026-11-19 17:23 |
+| #23 | 4 | `/writing-plans Story #23` | Done | 2026-11-19 17:23 | 2026-11-19 17:23 |
+| #23 | 5 | `/test-driven-development Story #23` | Done | 2026-11-19 17:23 | 2026-11-19 17:23 |
+| #23 | 6 | `/subagent-driven-development Story #23` | In progress | 2026-11-19 17:23 | - |
 | #23 | 7 | `/arfd-commit-push 23` after every task (repeat) | Planned | - | - |
 | #23 | 8 | `/verification-before-completion Story #23` | Planned | - | - |
 | #23 | 9 | `/requesting-code-review Story #23` | Planned | - | - |
