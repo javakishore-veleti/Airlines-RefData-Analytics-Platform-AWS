@@ -96,8 +96,8 @@ If a test fails and you do not know why, run `/systematic-debugging Story #N` be
 | #5 | 1 | `/arfd-story-start 5` | Done | 2026-11-19 16:26 | 2026-11-19 16:26 |
 | #5 | 2 | `/brainstorming Story #5: document that /arfd-* wrappers do not replace Superpowers natives` | Done | 2026-11-19 16:26 | 2026-11-19 16:26 |
 | #5 | 3 | `/verification-before-completion Story #5` | Done | 2026-11-19 16:26 | 2026-11-19 16:26 |
-| #5 | 4 | `/arfd-commit-push 5` | In progress | 2026-11-19 16:26 | - |
-| #5 | 5 | `/arfd-story-complete 5` | Planned | - | - |
+| #5 | 4 | `/arfd-commit-push 5` | Done | 2026-11-19 16:26 | 2026-11-19 16:26 |
+| #5 | 5 | `/arfd-story-complete 5` | In progress | 2026-11-19 16:26 | - |
 | #7 | 1 | `/arfd-story-start 7` | Planned | - | - |
 | #7 | 2 | `/brainstorming Story #7: add CICD/Local placeholders for lifecycle scripts and Kafka compose path` | Planned | - | - |
 | #7 | 3 | `/using-git-worktrees Story #7: branch m01-0007-cicd-local-path-stubs` | Planned | - | - |
