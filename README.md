@@ -2,22 +2,22 @@
 
 **Project code:** `ARFD` — Airlines Reference Data
 
-Near-real-time Change Data Capture (CDC) for airline **reference data (RD / RefData)**, landed as Apache Iceberg tables and served to operational and analytics users through dedicated portals.
+Near-real-time Change Data Capture (CDC) for airline **reference data (RD / RefData)**—kept current for operational and analytics users through dedicated portals.
 
 ---
 
 ## Introduction
 
-Airlines depend on **reference data** that changes often—market rules, route weights, status flags, and similar operational dimensions. That data typically lives in transactional MySQL. Analysts, risk managers, and data managers need those changes within minutes, not on overnight batch cycles.
+Airlines depend on **reference data** that changes often—market rules, route weights, status flags, and similar operational dimensions. That data typically lives in transactional databases. Analysts, risk managers, and data managers need those changes within minutes, not on overnight batch cycles.
 
 **ARFD** is a reference-data analytics platform that:
 
-1. Captures row-level changes from MySQL with **Debezium** into **Apache Kafka**
-2. Applies them in **batches** with **Apache Airflow** DAGs into **Apache Iceberg** on S3-compatible object storage
-3. Serves two portals through **Middleware/API-Services** (with **RabbitMQ** for async messaging):
+1. Captures row-level changes from the operational database—through a CDC and streaming path, or through **AWS native services** in the cloud—and lands them in an open analytics lake table format
+2. Applies inserts, updates, and deletes so the lake reflects the current state of reference data
+3. Exposes the data through middleware APIs to two portals:
    - **Airlines-RD-Admin** — create and manage source reference data
    - **Airlines-RD-Intelligence** — analysts, risk managers, and data managers view and query lake-backed data
-4. Deploys the same CDC → stream → batch-apply → Iceberg pattern on AWS using DMS, Kinesis, Data Firehose, and S3, aligned with the architecture described in the AWS Architecture Blog (see [References](#references))
+4. Follows the same CDC → stream → apply → lake pattern described in the AWS Architecture Blog (see [References](#references)), whether running on the application stack or on AWS managed services
 
 Delivery follows **[Superpowers](https://github.com/obra/superpowers)** (design → plan → TDD → review), with project-specific **`/arfd-*`** skills for GitHub board, milestone logging, and commit/push. Those wrappers do not replace the native Superpowers skills.
 
@@ -27,18 +27,18 @@ Delivery follows **[Superpowers](https://github.com/obra/superpowers)** (design 
 
 | Goal | What success looks like |
 |---|---|
-| Near-real-time RefData lake | Inserts, updates, and deletes on MySQL appear in Iceberg tables via Debezium → Kafka → Airflow |
-| Correct CDC semantics | Operations applied with merge/upsert semantics on a unique key (e.g. `rule_id`) |
-| Repeatable runtime lifecycle | `CICD/Local/docker-all-up.sh`, `all-down.sh`, and `all-status.sh` start, stop, and report MySQL, Kafka/Debezium, RabbitMQ, Airflow, and object storage |
-| Middleware | `Middleware/API-Services` for portals; `Middleware/DAGs` mounted into Airflow by relative path |
+| Near-real-time RefData lake | Source inserts, updates, and deletes appear in the analytics lake within minutes |
+| Correct CDC semantics | Current-state rows stay accurate after inserts, updates, and deletes (keyed identity) |
+| Repeatable runtime lifecycle | Lifecycle scripts start, stop, and report the platform services used for development and CI |
+| Middleware | APIs for portals; batch jobs mounted for the orchestration runtime |
 | Admin portal | `Portals/Airlines-RD-Admin` manages reference data end to end |
 | Intelligence portal | `Portals/Airlines-RD-Intelligence` lets analysts, risk managers, and data managers browse and query |
 | Milestone-driven delivery | GitHub milestones M01–M07 with epics / features / stories; each story runs `/arfd-story-start` → Superpowers natives → `/arfd-story-complete` |
-| AWS deployment path | Milestone M07 delivers the managed-service mapping (DMS, Kinesis, Firehose, S3, Glue/Athena) |
+| AWS deployment path | Milestone M07 delivers the cloud managed-service deployment of the same pattern |
 
-**Core pipeline:** MySQL (`market_db.market_rule`) → Debezium → Kafka → Airflow → Iceberg; Middleware; both portals.
+**Scope (M01–M06):** CDC from the operational database into the analytics lake; middleware; both portals.
 
-**AWS managed path:** Aurora MySQL, DMS, Kinesis, Firehose, Lambda, Glue, Athena—introduced under M07.
+**Scope (M07):** Same pattern on AWS native / managed services.
 
 ---
 
@@ -113,7 +113,7 @@ cloudformation/
 | M06 | Airlines-RD-Intelligence | Analyst / risk / data-manager portal |
 | M07 | AWS deployment | Managed-service stack aligned with the Architecture Blog |
 
-Full breakdown: [`docs/ROADMAP.md`](docs/ROADMAP.md)
+Full breakdown: [`docs/ROADMAP.md`](docs/ROADMAP.md) · milestone boards: [`docs/Project_Management/Issues/`](docs/Project_Management/Issues/)
 
 ---
 
