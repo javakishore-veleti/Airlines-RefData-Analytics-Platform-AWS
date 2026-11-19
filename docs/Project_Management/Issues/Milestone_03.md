@@ -55,13 +55,13 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #23 | 3 | `/using-git-worktrees Story #23: branch m03-0003-cdc-market-rule` | Done | 2026-11-19 17:23 | 2026-11-19 17:23 |
 | #23 | 4 | `/writing-plans Story #23` | Done | 2026-11-19 17:23 | 2026-11-19 17:23 |
 | #23 | 5 | `/test-driven-development Story #23` | Done | 2026-11-19 17:23 | 2026-11-19 17:23 |
-| #23 | 6 | `/subagent-driven-development Story #23` | In progress | 2026-11-19 17:23 | - |
-| #23 | 7 | `/arfd-commit-push 23` after every task (repeat) | Planned | - | - |
-| #23 | 8 | `/verification-before-completion Story #23` | Planned | - | - |
-| #23 | 9 | `/requesting-code-review Story #23` | Planned | - | - |
-| #23 | 10 | `/arfd-commit-push 23` | Planned | - | - |
-| #23 | 11 | `/finishing-a-development-branch Story #23` | Planned | - | - |
-| #23 | 12 | `/arfd-story-complete 23` | Planned | - | - |
+| #23 | 6 | `/subagent-driven-development Story #23` | Done | 2026-11-19 17:23 | 2026-11-19 17:59 |
+| #23 | 7 | `/arfd-commit-push 23` after every task (repeat) | Done | 2026-11-19 17:59 | 2026-11-19 17:59 |
+| #23 | 8 | `/verification-before-completion Story #23` | Done | 2026-11-19 17:59 | 2026-11-19 17:59 |
+| #23 | 9 | `/requesting-code-review Story #23` | Done | 2026-11-19 17:59 | 2026-11-19 17:59 |
+| #23 | 10 | `/arfd-commit-push 23` | Done | 2026-11-19 17:59 | 2026-11-19 17:59 |
+| #23 | 11 | `/finishing-a-development-branch Story #23` | Done | 2026-11-19 17:59 | 2026-11-19 17:59 |
+| #23 | 12 | `/arfd-story-complete 23` | Done | 2026-11-19 17:59 | 2026-11-19 17:59 |
 | #24 | 1 | `/arfd-story-start 24` | Planned | - | - |
 | #24 | 2 | `/brainstorming Story #24: decide topic naming and key partitioning for ARFD CDC` | Planned | - | - |
 | #24 | 3 | `/verification-before-completion Story #24` | Planned | - | - |
