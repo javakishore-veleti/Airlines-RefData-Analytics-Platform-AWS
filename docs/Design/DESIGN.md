@@ -96,5 +96,11 @@ Decisions are numbered `D##`. Record new ones here when brainstorming closes the
 
 **Decision:** Topic `arfd.market_db.market_rule` with Debezium key=`rule_id` for per-rule ordering. Schema history topic `arfd.schemahistory.market_rule`. Spec: `docs/Superpowers/specs/2026-11-19-m03-0004-topic-naming.md`.
 
-**Next decision number:** D7
+## D7 — CDC apply to local lake files
+
+**Status:** Decided (2026-11-19) — stories #26–#28
+
+**Decision:** Batch consumer under `Middleware/DAGs` (`arfd_cdc_market_rule_apply_dag.py`) runs `scripts/cdc_apply_market_rule.py`, mapping Debezium `c/r→insert`, `u→update`, `d→delete` via `lib/cdc_parse.py`, writing JSON objects under `runtime_data/lake/market_db/market_rule/rule_id=*.json` (MinIO-compatible prefix). Validate with `scripts/verify_lake_market_rule.py`.
+
+**Next decision number:** D8
 
