@@ -76,6 +76,21 @@ Aurora MySQL → DMS → Kinesis → Firehose (+ Lambda) → Iceberg on S3 → A
 
 ---
 
+
+## Local operator npm scripts
+
+```bash
+npm run local:containers:all:start
+npm run local:containers:all:status
+npm run local:containers:all:stop
+
+npm run local:middleware:all:start
+npm run local:middleware:all:status
+npm run local:middleware:all:down
+```
+
+`local:middleware:*` scans `Middleware/*/app-startup.sh` (skips `Middleware/DAGs`).
+
 ## Repository layout
 
 ```text

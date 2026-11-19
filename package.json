@@ -1,0 +1,13 @@
+{
+  "name": "arfd-platform",
+  "private": true,
+  "description": "Airlines RefData Analytics Platform — local operator scripts",
+  "scripts": {
+    "local:containers:all:start": "bash CICD/Local/docker-all-up.sh",
+    "local:containers:all:stop": "bash CICD/Local/all-down.sh",
+    "local:containers:all:status": "bash CICD/Local/all-status.sh",
+    "local:middleware:all:start": "bash scripts/local_middleware.sh start",
+    "local:middleware:all:status": "bash scripts/local_middleware.sh status",
+    "local:middleware:all:down": "bash scripts/local_middleware.sh down"
+  }
+}

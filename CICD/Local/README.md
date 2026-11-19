@@ -93,3 +93,10 @@ open Portals/Airlines-RD-Admin/index.html
 ```
 
 `POST /admin/cdc/generate` body: `{"count": 10}` — mixed INSERT/UPDATE/DELETE on `market_rule` so Debezium can emit change events.
+
+## npm wrappers (repo root)
+
+```bash
+npm run local:containers:all:start|status|stop
+npm run local:middleware:all:start|status|down
+```
