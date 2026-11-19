@@ -222,3 +222,6 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 runtime_data/
+
+.worktrees/
+runtime_data/

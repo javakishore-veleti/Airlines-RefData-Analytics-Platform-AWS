@@ -162,5 +162,7 @@ See `Milestone_01.md` section 4 for the full `/arfd-*` command table. Same skill
 
 ## 5. Notes
 
+- **D1 — Shared service reuse:** On this machine, if Apache Airflow, PostgreSQL, MySQL, or Redis is already healthy, lifecycle scripts **reuse** it (do not start a second copy). `all-down` stops only ARFD-started services unless `--including-shared`. See `docs/Design/DESIGN.md` (D1). Stories #12–#14, #16, #19 carry the acceptance criteria.
+
 - Hard gate: open `[Story]` + GitHub Milestone + `/arfd-story-start N` before product code.
 - Run milestones in order; do not start the next milestone until this one is complete (or explicitly parallelized by the team).
