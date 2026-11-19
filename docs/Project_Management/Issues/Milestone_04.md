@@ -2,7 +2,7 @@
 
 **Scope:** MasterData-API and AccountService-API (FastAPI project roots under `Middleware/`), root npm operator scripts, and DAG packaging.
 
-**Status:** open. Epic #29; 3 features; 11 stories. 1 done; 10 left to build.
+**Status:** open. Epic #29; 3 features; 11 stories. 3 done; 8 left to build.
 
 How to read this file:
 - `#N` is the GitHub issue number. The `M0N-00NN` key is the sequence tag at the start of the issue title.
@@ -120,18 +120,18 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #33 | 10 | `/arfd-commit-push 33` | Planned | - | - |
 | #33 | 11 | `/finishing-a-development-branch Story #33` | Planned | - | - |
 | #33 | 12 | `/arfd-story-complete 33` | Planned | - | - |
-| #34 | 1 | `/arfd-story-start 34` | Planned | - | - |
-| #34 | 2 | `/brainstorming Story #34: async messaging for MasterData-API` | Planned | - | - |
-| #34 | 3 | `/using-git-worktrees Story #34: branch m04-0006-async-messaging` | Planned | - | - |
-| #34 | 4 | `/writing-plans Story #34` | Planned | - | - |
-| #34 | 5 | `/test-driven-development Story #34` | Planned | - | - |
-| #34 | 6 | `/subagent-driven-development Story #34` | Planned | - | - |
-| #34 | 7 | `/arfd-commit-push 34` after every task (repeat) | Planned | - | - |
-| #34 | 8 | `/verification-before-completion Story #34` | Planned | - | - |
-| #34 | 9 | `/requesting-code-review Story #34` | Planned | - | - |
-| #34 | 10 | `/arfd-commit-push 34` | Planned | - | - |
-| #34 | 11 | `/finishing-a-development-branch Story #34` | Planned | - | - |
-| #34 | 12 | `/arfd-story-complete 34` | Planned | - | - |
+| #34 | 1 | `/arfd-story-start 34` | Done | 2026-11-19 18:17 | 2026-11-19 18:17 |
+| #34 | 2 | `/brainstorming Story #34: async messaging for MasterData-API` | Done | 2026-11-19 18:17 | 2026-11-19 18:17 |
+| #34 | 3 | `/using-git-worktrees Story #34: branch m04-0006-async-messaging` | Done | 2026-11-19 18:17 | 2026-11-19 18:17 |
+| #34 | 4 | `/writing-plans Story #34` | Done | 2026-11-19 18:17 | 2026-11-19 18:17 |
+| #34 | 5 | `/test-driven-development Story #34` | Done | 2026-11-19 18:17 | 2026-11-19 18:17 |
+| #34 | 6 | `/subagent-driven-development Story #34` | Done | 2026-11-19 18:17 | 2026-11-19 18:17 |
+| #34 | 7 | `/arfd-commit-push 34` after every task (repeat) | Done | 2026-11-19 18:17 | 2026-11-19 18:17 |
+| #34 | 8 | `/verification-before-completion Story #34` | Done | 2026-11-19 18:17 | 2026-11-19 18:17 |
+| #34 | 9 | `/requesting-code-review Story #34` | Done | 2026-11-19 18:17 | 2026-11-19 18:17 |
+| #34 | 10 | `/arfd-commit-push 34` | Done | 2026-11-19 18:17 | 2026-11-19 18:17 |
+| #34 | 11 | `/finishing-a-development-branch Story #34` | Done | 2026-11-19 18:17 | 2026-11-19 18:17 |
+| #34 | 12 | `/arfd-story-complete 34` | Done | 2026-11-19 18:17 | 2026-11-19 18:17 |
 | #58 | 1 | `/arfd-story-start 58` | Planned | - | - |
 | #58 | 2 | `/brainstorming Story #58: scaffold Middleware/AccountService-API with same D3 layering as MasterData-API` | Planned | - | - |
 | #58 | 3 | `/using-git-worktrees Story #58: branch m04-0013-accountservice-skeleton` | Planned | - | - |
@@ -168,11 +168,11 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #60 | 10 | `/arfd-commit-push 60` | Planned | - | - |
 | #60 | 11 | `/finishing-a-development-branch Story #60` | Planned | - | - |
 | #60 | 12 | `/arfd-story-complete 60` | Planned | - | - |
-| #36 | 1 | `/arfd-story-start 36` | Planned | - | - |
-| #36 | 2 | `/brainstorming Story #36: document Middleware/DAGs relative mount contract` | Planned | - | - |
-| #36 | 3 | `/verification-before-completion Story #36` | Planned | - | - |
-| #36 | 4 | `/arfd-commit-push 36` | Planned | - | - |
-| #36 | 5 | `/arfd-story-complete 36` | Planned | - | - |
+| #36 | 1 | `/arfd-story-start 36` | Done | 2026-11-19 18:19 | 2026-11-19 18:19 |
+| #36 | 2 | `/brainstorming Story #36: document Middleware/DAGs relative mount contract` | Done | 2026-11-19 18:19 | 2026-11-19 18:19 |
+| #36 | 3 | `/verification-before-completion Story #36` | Done | 2026-11-19 18:19 | 2026-11-19 18:19 |
+| #36 | 4 | `/arfd-commit-push 36` | Done | 2026-11-19 18:19 | 2026-11-19 18:19 |
+| #36 | 5 | `/arfd-story-complete 36` | Done | 2026-11-19 18:19 | 2026-11-19 18:19 |
 | #37 | 1 | `/arfd-story-start 37` | Planned | - | - |
 | #37 | 2 | `/brainstorming Story #37: shared CDC parse and lake writer libraries` | Planned | - | - |
 | #37 | 3 | `/using-git-worktrees Story #37: branch m04-0009-shared-cdc-lake-libs` | Planned | - | - |
@@ -185,7 +185,7 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #37 | 10 | `/arfd-commit-push 37` | Planned | - | - |
 | #37 | 11 | `/finishing-a-development-branch Story #37` | Planned | - | - |
 | #37 | 12 | `/arfd-story-complete 37` | Planned | - | - |
-| Feature #30 | 1 | `/arfd-feature-complete 30` | Planned | - | - |
+| Feature #30 | 1 | `/arfd-feature-complete 30` | Done | 2026-11-19 18:18 | 2026-11-19 18:18 |
 | Feature #57 | 1 | `/arfd-feature-complete 57` | Planned | - | - |
 | Feature #35 | 1 | `/arfd-feature-complete 35` | Planned | - | - |
 | Epic #29 | 1 | `/arfd-epic-complete 29` | Planned | - | - |
