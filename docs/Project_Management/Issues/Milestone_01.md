@@ -2,7 +2,7 @@
 
 **Scope:** ARFD methodology (Superpowers + `/arfd-*` wrappers), product docs alignment, and repository skeleton for CICD, Middleware, and Portals. No AWS stack creates in this milestone.
 
-**Status:** open. Epic #1; features #2, #6; 6 stories. 1 done; 5 left to build.
+**Status:** open. Epic #1; features #2, #6; 6 stories. 2 done; 4 left to build.
 
 How to read this file:
 - `#1` is the GitHub issue number. The `M01-00NN` key is the sequence tag at the start of the issue title. Keys are not in build order.
@@ -110,18 +110,18 @@ If a test fails and you do not know why, run `/systematic-debugging Story #N` be
 | #7 | 10 | `/arfd-commit-push 7` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
 | #7 | 11 | `/finishing-a-development-branch Story #7` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
 | #7 | 12 | `/arfd-story-complete 7` | Done | 2026-11-19 16:27 | 2026-11-19 16:27 |
-| #8 | 1 | `/arfd-story-start 8` | Planned | - | - |
-| #8 | 2 | `/brainstorming Story #8: add Middleware/API-Services and Middleware/DAGs placeholders` | Planned | - | - |
-| #8 | 3 | `/using-git-worktrees Story #8: branch m01-0008-middleware-path-stubs` | Planned | - | - |
-| #8 | 4 | `/writing-plans Story #8` | Planned | - | - |
-| #8 | 5 | `/test-driven-development Story #8` | Planned | - | - |
-| #8 | 6 | `/subagent-driven-development Story #8` | Planned | - | - |
-| #8 | 7 | `/arfd-commit-push 8` after every task (repeat) | Planned | - | - |
-| #8 | 8 | `/verification-before-completion Story #8` | Planned | - | - |
-| #8 | 9 | `/requesting-code-review Story #8` | Planned | - | - |
-| #8 | 10 | `/arfd-commit-push 8` | Planned | - | - |
-| #8 | 11 | `/finishing-a-development-branch Story #8` | Planned | - | - |
-| #8 | 12 | `/arfd-story-complete 8` | Planned | - | - |
+| #8 | 1 | `/arfd-story-start 8` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
+| #8 | 2 | `/brainstorming Story #8: add Middleware/API-Services and Middleware/DAGs placeholders` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
+| #8 | 3 | `/using-git-worktrees Story #8: branch m01-0008-middleware-path-stubs` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
+| #8 | 4 | `/writing-plans Story #8` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
+| #8 | 5 | `/test-driven-development Story #8` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
+| #8 | 6 | `/subagent-driven-development Story #8` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
+| #8 | 7 | `/arfd-commit-push 8` after every task (repeat) | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
+| #8 | 8 | `/verification-before-completion Story #8` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
+| #8 | 9 | `/requesting-code-review Story #8` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
+| #8 | 10 | `/arfd-commit-push 8` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
+| #8 | 11 | `/finishing-a-development-branch Story #8` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
+| #8 | 12 | `/arfd-story-complete 8` | Done | 2026-11-19 16:28 | 2026-11-19 16:28 |
 | #9 | 1 | `/arfd-story-start 9` | Planned | - | - |
 | #9 | 2 | `/brainstorming Story #9: add Airlines-RD-Admin and Airlines-RD-Intelligence portal placeholders` | Planned | - | - |
 | #9 | 3 | `/using-git-worktrees Story #9: branch m01-0009-portals-path-stubs` | Planned | - | - |
