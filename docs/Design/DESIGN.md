@@ -90,5 +90,11 @@ Decisions are numbered `D##`. Record new ones here when brainstorming closes the
 
 **Applies to:** M05 #40/#61/#62, M06 #46; shared tokens live under each portal’s `styles/` (extract shared theme package later if duplication hurts).
 
-**Next decision number:** D6
+## D6 — CDC topic naming and keys
+
+**Status:** Decided (2026-11-19) — story #24
+
+**Decision:** Topic `arfd.market_db.market_rule` with Debezium key=`rule_id` for per-rule ordering. Schema history topic `arfd.schemahistory.market_rule`. Spec: `docs/Superpowers/specs/2026-11-19-m03-0004-topic-naming.md`.
+
+**Next decision number:** D7
 

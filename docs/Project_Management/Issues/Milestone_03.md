@@ -2,7 +2,7 @@
 
 **Scope:** Stream operational reference-data changes into the analytics lake with correct insert/update/delete semantics.
 
-**Status:** open. Epic #21; 2 features; 5 stories. 0 done; 5 left to build.
+**Status:** open. Epic #21; 2 features; 5 stories. 2 done; 3 left to build.
 
 How to read this file:
 - `#N` is the GitHub issue number. The `M0N-00NN` key is the sequence tag at the start of the issue title.
@@ -62,11 +62,11 @@ One chat per story. `/arfd-*` are board wrappers; `/brainstorming`, `/using-git-
 | #23 | 10 | `/arfd-commit-push 23` | Done | 2026-11-19 17:59 | 2026-11-19 17:59 |
 | #23 | 11 | `/finishing-a-development-branch Story #23` | Done | 2026-11-19 17:59 | 2026-11-19 17:59 |
 | #23 | 12 | `/arfd-story-complete 23` | Done | 2026-11-19 17:59 | 2026-11-19 17:59 |
-| #24 | 1 | `/arfd-story-start 24` | Planned | - | - |
-| #24 | 2 | `/brainstorming Story #24: decide topic naming and key partitioning for ARFD CDC` | Planned | - | - |
-| #24 | 3 | `/verification-before-completion Story #24` | Planned | - | - |
-| #24 | 4 | `/arfd-commit-push 24` | Planned | - | - |
-| #24 | 5 | `/arfd-story-complete 24` | Planned | - | - |
+| #24 | 1 | `/arfd-story-start 24` | Done | 2026-11-19 18:00 | 2026-11-19 18:00 |
+| #24 | 2 | `/brainstorming Story #24: decide topic naming and key partitioning for ARFD CDC` | Done | 2026-11-19 18:00 | 2026-11-19 18:00 |
+| #24 | 3 | `/verification-before-completion Story #24` | Done | 2026-11-19 18:00 | 2026-11-19 18:00 |
+| #24 | 4 | `/arfd-commit-push 24` | Done | 2026-11-19 18:00 | 2026-11-19 18:00 |
+| #24 | 5 | `/arfd-story-complete 24` | Done | 2026-11-19 18:00 | 2026-11-19 18:00 |
 | #26 | 1 | `/arfd-story-start 26` | Planned | - | - |
 | #26 | 2 | `/brainstorming Story #26: design batch consumer job under Middleware/DAGs for ARFD CDC` | Planned | - | - |
 | #26 | 3 | `/using-git-worktrees Story #26: branch m03-0006-batch-consumer-dag` | Planned | - | - |
