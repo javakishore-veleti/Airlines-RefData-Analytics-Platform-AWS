@@ -5,6 +5,7 @@ import { SigninComponent } from './pages/signin.component';
 import { SignupComponent } from './pages/signup.component';
 import { HomeComponent } from './pages/home.component';
 import { PlaceholderComponent } from './pages/placeholder.component';
+import { BrowseComponent } from './pages/browse.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'signin' },
@@ -17,11 +18,7 @@ export const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'home' },
       { path: 'home', component: HomeComponent },
-      {
-        path: 'browse',
-        component: PlaceholderComponent,
-        data: { title: 'Browse / filter', blurb: 'Lake browse lands in story #47.' },
-      },
+      { path: 'browse', component: BrowseComponent },
       {
         path: 'saved-views',
         component: PlaceholderComponent,
