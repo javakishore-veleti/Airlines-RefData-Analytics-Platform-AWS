@@ -1,5 +1,11 @@
 # Airlines-RD-Intelligence
 
-Intelligence portal for analysts, risk managers, and data managers to view and query lake-backed reference data.
+Angular Intelligence portal (D5): PrimeNG Aura, Lucide, navy/ice/sky.
 
-Implemented under Milestone M06.
+```bash
+cd Portals/Airlines-RD-Intelligence
+npm install
+npm start   # http://127.0.0.1:4201
+```
+
+Default login: `arfd-admin` / `arfd-admin` (AccountService-API).

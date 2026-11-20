@@ -1,0 +1,30 @@
+@import 'primeicons/primeicons.css';
+/* D5 — Portal UI tokens */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import 'bootstrap/dist/css/bootstrap-grid.min.css';
+@import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+
+:root {
+  --arfd-navy: #0f172a;
+  --arfd-muted: #475569;
+  --arfd-ice: #f4f8fb;
+  --arfd-white: #ffffff;
+  --arfd-border: #dbeafe;
+  --arfd-sky: #0284c7;
+  --arfd-sky-deep: #0369a1;
+  --arfd-nav-width: 240px;
+  --arfd-topbar-height: 56px;
+  --bs-body-font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--arfd-ice);
+  color: var(--arfd-navy);
+  line-height: 1.5;
+}
+
+a { color: var(--arfd-sky); text-decoration: none; }
+a:hover { color: var(--arfd-sky-deep); }

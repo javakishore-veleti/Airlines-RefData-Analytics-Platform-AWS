@@ -1,0 +1,14 @@
+{
+  "/account-api": {
+    "target": "http://127.0.0.1:8111",
+    "secure": false,
+    "pathRewrite": { "^/account-api": "" },
+    "changeOrigin": true
+  },
+  "/masterdata-api": {
+    "target": "http://127.0.0.1:8110",
+    "secure": false,
+    "pathRewrite": { "^/masterdata-api": "" },
+    "changeOrigin": true
+  }
+}

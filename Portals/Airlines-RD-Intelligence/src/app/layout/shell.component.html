@@ -1,0 +1,40 @@
+<div class="shell" [class.nav-collapsed]="!navOpen()">
+  <header class="topbar">
+    <button type="button" class="icon-btn" (click)="toggleNav()" aria-label="Toggle navigation">
+      <svg lucideMenu [size]="20"></svg>
+    </button>
+    <div class="brand">
+      <svg lucidePlane [size]="22" class="brand-mark"></svg>
+      <div class="brand-text">
+        <span class="brand-name">Airlines RefData</span>
+        <span class="brand-sub">Intelligence</span>
+      </div>
+    </div>
+    <div class="topbar-spacer"></div>
+    @if (auth.current(); as user) {
+      <span class="user-chip">{{ user.username }} · {{ user.role }}</span>
+    }
+    <p-button label="Sign out" [text]="true" severity="secondary" (onClick)="signout()" />
+  </header>
+
+  <aside class="sidenav">
+    <nav>
+      <a routerLink="/app/home" routerLinkActive="active">
+        <svg lucideLayoutDashboard [size]="18"></svg>
+        <span>Overview</span>
+      </a>
+      <a routerLink="/app/browse" routerLinkActive="active">
+        <svg lucideSearch [size]="18"></svg>
+        <span>Browse / filter</span>
+      </a>
+      <a routerLink="/app/saved-views" routerLinkActive="active">
+        <svg lucideBookmark [size]="18"></svg>
+        <span>Saved views</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="workspace">
+    <router-outlet />
+  </main>
+</div>
