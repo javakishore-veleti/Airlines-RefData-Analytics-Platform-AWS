@@ -4,8 +4,8 @@ import { ShellComponent } from './layout/shell.component';
 import { SigninComponent } from './pages/signin.component';
 import { SignupComponent } from './pages/signup.component';
 import { HomeComponent } from './pages/home.component';
-import { PlaceholderComponent } from './pages/placeholder.component';
 import { BrowseComponent } from './pages/browse.component';
+import { SavedViewsComponent } from './pages/saved-views.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'signin' },
@@ -19,11 +19,7 @@ export const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'home' },
       { path: 'home', component: HomeComponent },
       { path: 'browse', component: BrowseComponent },
-      {
-        path: 'saved-views',
-        component: PlaceholderComponent,
-        data: { title: 'Saved views', blurb: 'Query / saved views land in story #48.' },
-      },
+      { path: 'saved-views', component: SavedViewsComponent },
     ],
   },
   { path: '**', redirectTo: 'signin' },

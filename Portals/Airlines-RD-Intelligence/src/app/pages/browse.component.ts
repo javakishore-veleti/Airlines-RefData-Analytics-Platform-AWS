@@ -1,4 +1,5 @@
 import { Component, OnInit, computed, signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
@@ -102,9 +103,14 @@ export class BrowseComponent implements OnInit {
     });
   });
 
-  constructor(private readonly lake: LakeService) {}
+  constructor(private readonly lake: LakeService, private readonly route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    const q = this.route.snapshot.queryParamMap;
+    this.fromFilter.set(q.get('from') || '');
+    this.toFilter.set(q.get('to') || '');
+    this.statusFilter.set(q.get('status') || '');
+    this.nameFilter.set(q.get('name') || '');
     this.reload();
   }
 
