@@ -75,7 +75,9 @@ Decisions are numbered `D##`. Record new ones here when brainstorming closes the
 
 ## D5 — Portal UI system (Angular, professional light theme)
 
-**Status:** Decided (2026-11-19) — stories #62 / #40 / #46
+**Status:** Decided (2026-11-19) — story #62
+**Spec:** `docs/Superpowers/specs/2026-11-19-m05-0008-d5-portal-ui-system.md`
+**Applies to implementing stories:** #40 / #46 / #61
 
 **Context:** Admin and Intelligence portals must look like professional airline/enterprise SaaS — not academic gray slabs, not pure black, not generic purple AI themes. Research favors PrimeNG light presets + tinted neutrals + modern SVG icons over stock Bootstrap gray.
 

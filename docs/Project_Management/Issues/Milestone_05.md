@@ -2,7 +2,7 @@
 
 **Scope:** Angular Admin portal with professional D5 UI (PrimeNG Aura/Lara light, Lucide, navy/ice/sky), AccountService auth, User Management, market rules, and wiring to MasterData-API + AccountService-API.
 
-**Status:** open. Epic #38; 1 feature; 6 stories. 0 done; 6 left to build.
+**Status:** open. Epic #38; 1 feature; 6 stories. 1 done; 5 left to build.
 
 How to read this file:
 - `#N` is the GitHub issue number. The `M0N-00NN` key is the sequence tag at the start of the issue title.
@@ -52,12 +52,12 @@ One chat per story. `/arfd-*` are board wrappers; Superpowers natives own design
 
 | Issue | Step | Command | Status | Started | Completed |
 |---|---|---|---|---|---|
-| #62 | 1 | `/arfd-story-start 62` | Planned | - | - |
-| #62 | 2 | `/brainstorming Story #62: finalize D5 portal UI system (PrimeNG Aura/Lara, Lucide, navy/ice/sky, no black/gray academic chrome)` | Planned | - | - |
-| #62 | 3 | `/writing-plans Story #62` | Planned | - | - |
-| #62 | 4 | `/verification-before-completion Story #62` | Planned | - | - |
-| #62 | 5 | `/arfd-commit-push 62` | Planned | - | - |
-| #62 | 6 | `/arfd-story-complete 62` | Planned | - | - |
+| #62 | 1 | `/arfd-story-start 62` | Done | 2026-11-19 18:41 | 2026-11-19 18:41 |
+| #62 | 2 | `/brainstorming Story #62: finalize D5 portal UI system (PrimeNG Aura/Lara, Lucide, navy/ice/sky, no black/gray academic chrome)` | Done | 2026-11-19 18:41 | 2026-11-19 19:40 |
+| #62 | 3 | `/writing-plans Story #62` | Done | 2026-11-19 19:40 | 2026-11-19 19:40 |
+| #62 | 4 | `/verification-before-completion Story #62` | Done | 2026-11-19 19:40 | 2026-11-19 19:40 |
+| #62 | 5 | `/arfd-commit-push 62` | Done | 2026-11-19 19:40 | 2026-11-19 19:40 |
+| #62 | 6 | `/arfd-story-complete 62` | Done | 2026-11-19 19:40 | 2026-11-19 19:40 |
 | #40 | 1 | `/arfd-story-start 40` | Planned | - | - |
 | #40 | 2 | `/brainstorming Story #40: Angular Admin shell with top bar, left nav, signup/signin, favicon per D5` | Planned | - | - |
 | #40 | 3 | `/using-git-worktrees Story #40: branch m05-0003-admin-angular-shell` | Planned | - | - |
