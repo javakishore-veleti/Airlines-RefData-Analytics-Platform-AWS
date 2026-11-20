@@ -16,6 +16,26 @@ AIRPORTS = [
 
 
 class MarketRuleDao(Protocol):
+    def list_rules(self, limit: int = 100) -> list[dict]: ...
+
+    def list_rules(self, limit: int = 100) -> list[dict]:
+        conn = self._conn()
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT rule_id, name, weight, status, market_from, market_to, updated_at
+                    FROM market_rule
+                    ORDER BY rule_id DESC
+                    LIMIT %s
+                    """,
+                    (limit,),
+                )
+                cols = [d[0] for d in cur.description]
+                return [dict(zip(cols, row)) for row in cur.fetchall()]
+        finally:
+            conn.close()
+
     def generate_cdc_mix(self, count: int) -> tuple[int, int, int]: ...
     def create(self, name: str, weight: int, status: str, market_from: str, market_to: str) -> int: ...
     def update(self, rule_id: int, name: str, weight: int, status: str, market_from: str, market_to: str) -> bool: ...

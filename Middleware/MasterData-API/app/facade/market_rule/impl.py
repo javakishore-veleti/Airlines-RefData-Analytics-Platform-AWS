@@ -6,6 +6,9 @@ class MarketRuleFacadeImpl:
     def __init__(self, wf: WFMarketRuleWrite) -> None:
         self._wf = wf
 
+    def list(self, limit: int = 100):
+        return self._wf.list(limit)
+
     def create(self, ctx: MarketRuleWriteCtx) -> MarketRuleWriteCtx:
         return self._wf.create(ctx)
 

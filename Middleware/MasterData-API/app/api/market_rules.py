@@ -19,6 +19,21 @@ class MarketRuleBody(BaseModel):
     market_to: str = "SFO"
 
 
+@router.get("")
+def list_rules(limit: int = 100) -> dict:
+    facade = facade_factory.get_bean("market_rule_facade")
+    items = facade.list(limit=limit)
+    # serialize datetimes
+    out = []
+    for row in items:
+        item = dict(row)
+        for k, v in list(item.items()):
+            if hasattr(v, "isoformat"):
+                item[k] = v.isoformat()
+        out.append(item)
+    return {"count": len(out), "items": out}
+
+
 @router.post("")
 def create_rule(body: MarketRuleBody) -> dict:
     facade = facade_factory.get_bean("market_rule_facade")

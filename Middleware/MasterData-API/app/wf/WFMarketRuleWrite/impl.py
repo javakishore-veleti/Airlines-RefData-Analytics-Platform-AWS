@@ -6,6 +6,9 @@ class WFMarketRuleWriteImpl:
     def __init__(self, dao: MarketRuleDao) -> None:
         self._dao = dao
 
+    def list(self, limit: int = 100):
+        return self._dao.list_rules(limit=limit)
+
     def create(self, ctx: MarketRuleWriteCtx) -> MarketRuleWriteCtx:
         r = ctx.req
         rule_id = self._dao.create(r.name, r.weight, r.status, r.market_from, r.market_to)
