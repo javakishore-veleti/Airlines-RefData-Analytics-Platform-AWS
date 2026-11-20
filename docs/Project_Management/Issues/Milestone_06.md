@@ -2,7 +2,7 @@
 
 **Scope:** Angular Intelligence portal sharing D5 professional UI with Admin; role-oriented nav; AccountService auth; browse/query; wiring to MasterData-API + AccountService-API.
 
-**Status:** open. Epic #44; 1 feature; 4 stories. 0 done; 4 left to build.
+**Status:** closed — completed 2026-11-19. Epic #44; 1 feature; 4 stories. 4 done; 0 left to build.
 
 How to read this file:
 - `#N` is the GitHub issue number. The `M0N-00NN` key is the sequence tag at the start of the issue title.
@@ -84,18 +84,18 @@ One chat per story. `/arfd-*` are board wrappers; Superpowers natives own design
 | #48 | 10 | `/arfd-commit-push 48` | Planned | - | - |
 | #48 | 11 | `/finishing-a-development-branch Story #48` | Planned | - | - |
 | #48 | 12 | `/arfd-story-complete 48` | Planned | - | - |
-| #49 | 1 | `/arfd-story-start 49` | Planned | - | - |
-| #49 | 2 | `/brainstorming Story #49: wire Intelligence to MasterData-API and AccountService-API` | Planned | - | - |
-| #49 | 3 | `/using-git-worktrees Story #49: branch m06-0006-intel-api-wire` | Planned | - | - |
-| #49 | 4 | `/writing-plans Story #49` | Planned | - | - |
-| #49 | 5 | `/test-driven-development Story #49` | Planned | - | - |
-| #49 | 6 | `/subagent-driven-development Story #49` | Planned | - | - |
-| #49 | 7 | `/arfd-commit-push 49` after every task (repeat) | Planned | - | - |
-| #49 | 8 | `/verification-before-completion Story #49` | Planned | - | - |
-| #49 | 9 | `/requesting-code-review Story #49` | Planned | - | - |
-| #49 | 10 | `/arfd-commit-push 49` | Planned | - | - |
-| #49 | 11 | `/finishing-a-development-branch Story #49` | Planned | - | - |
-| #49 | 12 | `/arfd-story-complete 49` | Planned | - | - |
+| #49 | 1 | `/arfd-story-start 49` | Done | 2026-11-19 20:00 | 2026-11-19 20:00 |
+| #49 | 2 | `/brainstorming Story #49: wire Intelligence to MasterData-API and AccountService-API` | Done | 2026-11-19 20:00 | 2026-11-19 20:00 |
+| #49 | 3 | `/using-git-worktrees Story #49: branch m06-0006-intel-api-wire` | Done | 2026-11-19 20:00 | 2026-11-19 20:00 |
+| #49 | 4 | `/writing-plans Story #49` | Done | 2026-11-19 20:00 | 2026-11-19 20:00 |
+| #49 | 5 | `/test-driven-development Story #49` | Done | 2026-11-19 20:00 | 2026-11-19 20:00 |
+| #49 | 6 | `/subagent-driven-development Story #49` | Done | 2026-11-19 20:00 | 2026-11-19 20:00 |
+| #49 | 7 | `/arfd-commit-push 49` after every task (repeat) | Done | 2026-11-19 20:00 | 2026-11-19 20:00 |
+| #49 | 8 | `/verification-before-completion Story #49` | Done | 2026-11-19 20:00 | 2026-11-19 20:00 |
+| #49 | 9 | `/requesting-code-review Story #49` | Done | 2026-11-19 20:00 | 2026-11-19 20:00 |
+| #49 | 10 | `/arfd-commit-push 49` | Done | 2026-11-19 20:00 | 2026-11-19 20:00 |
+| #49 | 11 | `/finishing-a-development-branch Story #49` | Done | 2026-11-19 20:00 | 2026-11-19 20:00 |
+| #49 | 12 | `/arfd-story-complete 49` | Done | 2026-11-19 20:00 | 2026-11-19 20:00 |
 | Feature #45 | 1 | `/arfd-feature-complete 45` | Planned | - | - |
 | Epic #44 | 1 | `/arfd-epic-complete 44` | Planned | - | - |
 
