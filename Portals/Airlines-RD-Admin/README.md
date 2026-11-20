@@ -1,15 +1,29 @@
 # Airlines-RD-Admin
 
-Reference Data Admin portal — manage source reference data and trigger CDC simulation.
+Angular Admin portal (D5): PrimeNG Aura light, Lucide icons, navy/ice/sky tokens.
 
-## M02
-
-Open `index.html` (or serve the directory) for **Generate CDC events**. It POSTs to Middleware `POST /admin/cdc/generate`.
+## Local run
 
 ```bash
-# API must be running (see Middleware/MasterData-API/README.md)
-python -m http.server 5500 --directory Portals/Airlines-RD-Admin
-# open http://127.0.0.1:5500/
+# Terminal A — AccountService (auth)
+cd Middleware/AccountService-API && ./app-startup.sh
+
+# Terminal B — Admin UI
+cd Portals/Airlines-RD-Admin
+npm install
+npm start   # http://127.0.0.1:4200
 ```
 
-Full portal shell / CRUD lands in Milestone M05.
+## Default local login
+
+| Username | Password |
+|---|---|
+| `arfd-admin` | `arfd-admin` |
+
+Seeded by AccountService-API on first user/auth call.
+
+## Layout
+
+- Top bar + collapsible left nav + favicon
+- Routes: Overview, Market rules, Pipeline health, **User Management**
+- Signup / signin against AccountService-API (`ARFD_ACCOUNT_API` default `http://127.0.0.1:8111`)
